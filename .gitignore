@@ -138,3 +138,19 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# --- 本项目新增：本地运行产物与工具缓存 ---
+# 本地 SQLite 数据库与重建/迁移备份
+*.db
+*.db.bak_*
+*.db.old
+
+# 失效虚拟环境备份（.venv 已在上面忽略）
+.venv.broken_*
+
+# 工具缓存
+.workbuddy/
+
+# 测试与构建缓存（补充）
+.pytest_cache/
+app/dist/
