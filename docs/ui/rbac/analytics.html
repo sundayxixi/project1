@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数据统计 · 辰光 Agent</title>
+<link rel="stylesheet" href="assets/app.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body data-page="analytics" data-crumb="平台功能|数据统计" data-page-perm="analytics:view" data-resource="agent">
+<a class="skip-link" href="#main">跳到主要内容</a>
+<div class="shell">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="main">
+    <header class="topbar" id="topbar"></header>
+    <main class="content" id="main">
+      <div class="page">
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">数据统计<span class="qualifier">预留模块</span></h1>
+            <p class="page-desc">汇总只包含当前用户可见的 Agent 及其对话。不同身份看到的数字可以不同，这是预期行为，不是数据缺失。</p>
+          </div>
+          <div class="page-actions">
+            <a class="btn" href="conversations.html">对话日志</a>
+          </div>
+        </div>
+
+        <div class="context-strip" data-context></div>
+
+        <div class="note note--warn" style="margin-bottom:14px;">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+          <span><strong>统计口径：</strong>仅聚合你有权查看的 Agent 与对话。切换为“开发者 · 仅本人”后，下方的合计与会话占比会一起收缩。</span>
+        </div>
+
+        <div class="statline">
+          <div class="stat">
+            <div class="k">可见 Agent</div>
+            <div class="v" data-visible-count>7</div>
+            <div class="d">按查看范围过滤</div>
+          </div>
+          <div class="stat">
+            <div class="k">会话数</div>
+            <div class="v" data-sum="conv">1,284</div>
+            <div class="d">时间范围：最近 30 天</div>
+          </div>
+          <div class="stat">
+            <div class="k">Token 用量</div>
+            <div class="v" data-sum="tokens" data-format="compact">2.3M</div>
+            <div class="d">输入 + 输出</div>
+          </div>
+          <div class="stat">
+            <div class="k">费用</div>
+            <div class="v" data-sum="cost" data-format="money">¥455.80</div>
+            <div class="d">按模型单价估算</div>
+          </div>
+        </div>
+
+        <div class="surface" data-table-wrap>
+          <div class="table-scroll">
+            <table class="table" data-count-table>
+              <thead>
+                <tr>
+                  <th>Agent</th>
+                  <th>归属人</th>
+                  <th>会话数</th>
+                  <th>会话占比</th>
+                  <th>Token</th>
+                  <th>费用</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-owner="u2" data-acl-view="u3" data-conv="428" data-tokens="812000" data-cost="168.40">
+                  <td><span class="name">智能客服助手</span><span class="sub">智能客服</span></td>
+                  <td class="cell-owner"><span class="owner"><span class="seal" aria-hidden="true">张</span><span class="who">张三</span></span></td>
+                  <td class="num">428</td>
+                  <td class="num" data-share-of="conv">33.3%</td>
+                  <td class="num">812,000</td>
+                  <td class="num">¥168.40</td>
+                </tr>
+                <tr data-owner="u6" data-conv="274" data-tokens="530000" data-cost="112.80">
+                  <td><span class="name">数据问答 Agent</span><span class="sub">数据</span></td>
+                  <td class="cell-owner"><span class="owner"><span class="seal" aria-hidden="true">孙</span><span class="who">孙悦</span></span></td>
+                  <td class="num">274</td>
+                  <td class="num" data-share-of="conv">21.3%</td>
+                  <td class="num">530,000</td>
+                  <td class="num">¥112.80</td>
+                </tr>
+                <tr data-owner="u3" data-conv="212" data-tokens="486000" data-cost="96.20">
+                  <td><span class="name">合同审阅助手</span><span class="sub">法务</span></td>
+                  <td class="cell-owner"><span class="owner"><span class="seal" aria-hidden="true">李</span><span class="who">李四</span></span></td>
+                  <td class="num">212</td>
+                  <td class="num" data-share-of="conv">16.5%</td>
+                  <td class="num">486,000</td>
+                  <td class="num">¥96.20</td>
+                </tr>
+                <tr data-owner="u4" data-conv="132" data-tokens="96000" data-cost="14.20">
+                  <td><span class="name">邮件分类助手</span><span class="sub">行政</span></td>
+                  <td class="cell-owner"><span class="owner"><span class="seal" aria-hidden="true">王</span><span class="who">王敏</span></span></td>
+                  <td class="num">132</td>
+                  <td class="num" data-share-of="conv">10.3%</td>
+                  <td class="num">96,000</td>
+                  <td class="num">¥14.20</td>
+                </tr>
+                <tr data-owner="u1" data-conv="114" data-tokens="210000" data-cost="38.50">
+                  <td><span class="name">知识库巡检</span><span class="sub">运维</span></td>
+                  <td class="cell-owner"><span class="owner"><span class="seal" aria-hidden="true">陈</span><span class="who">陈晓</span></span></td>
+                  <td class="num">114</td>
+                  <td class="num" data-share-of="conv">8.9%</td>
+                  <td class="num">210,000</td>
+                  <td class="num">¥38.50</td>
+                </tr>
+                <tr data-owner="u2" data-conv="86" data-tokens="104000" data-cost="18.60">
+                  <td><span class="name">工单摘要 Agent</span><span class="sub">客服</span></td>
+                  <td class="cell-owner"><span class="owner"><span class="seal" aria-hidden="true">张</span><span class="who">张三</span></span></td>
+                  <td class="num">86</td>
+                  <td class="num" data-share-of="conv">6.7%</td>
+                  <td class="num">104,000</td>
+                  <td class="num">¥18.60</td>
+                </tr>
+                <tr data-owner="u3" data-conv="38" data-tokens="42000" data-cost="7.10">
+                  <td><span class="name">招聘筛选助手</span><span class="sub">人力资源</span></td>
+                  <td class="cell-owner"><span class="owner"><span class="seal" aria-hidden="true">李</span><span class="who">李四</span></span></td>
+                  <td class="num">38</td>
+                  <td class="num" data-share-of="conv">3.0%</td>
+                  <td class="num">42,000</td>
+                  <td class="num">¥7.10</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-foot">
+            <span class="note">
+              可见 <span data-visible-count>7</span> 个 Agent
+              <span class="dot-sep" aria-hidden="true"></span>
+              合计只统计可见数据，空状态时展示提示而不是 0
+            </span>
+            <div class="pager" aria-label="分页">
+              <button type="button" disabled>上一页</button>
+              <button type="button" class="is-current">1</button>
+              <button type="button">下一页</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="empty" data-empty-scope hidden>
+          <div class="glyph" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+          </div>
+          <h3>当前数据范围内暂无可统计的数据</h3>
+          <p>没有可见的 Agent 或对话时，汇总为空是预期结果。请确认角色数据范围或资源共享情况。</p>
+          <a class="btn" href="profile.html">查看我的数据范围</a>
+        </div>
+
+        <div class="note" style="margin-top:14px;">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+          <span>本期后端未实现统计接口；页面保留，用于确认菜单、路由与“按数据权限统计”的表达方式。上线时需要新增接口、声明 <code class="code">analytics:view</code> 并接入数据过滤。</span>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

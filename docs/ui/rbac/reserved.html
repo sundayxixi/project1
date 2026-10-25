@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-reserved-title>预留模块 · 辰光 Agent</title>
+<link rel="stylesheet" href="assets/app.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body data-module-page="apikey" data-page="apikey" data-crumb="系统管理|预留模块">
+<a class="skip-link" href="#main">跳到主要内容</a>
+<div class="shell">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="main">
+    <header class="topbar" id="topbar"></header>
+    <main class="content" id="main">
+      <div class="page">
+        <div class="page-head">
+          <div>
+            <h1 class="page-title"><span data-reserved-name>API 密钥</span><span class="qualifier">预留模块</span></h1>
+            <p class="page-desc">后端接口尚未实现。本期只保留菜单、路由与按钮的权限控制，避免权限矩阵出现“看得见但点不动”的空档。</p>
+          </div>
+          <div class="page-actions">
+            <a class="btn" href="system-roles.html" data-perm="role:view">去角色配置</a>
+            <a class="btn" href="system-permissions.html" data-perm="permission:view">查看权限目录</a>
+          </div>
+        </div>
+
+        <div class="context-strip" data-context></div>
+
+        <div class="detail-grid">
+          <div class="detail-stack">
+            <div class="panel">
+              <div class="panel-head">
+                <h2>模块状态</h2>
+                <span class="tag tag--reserved">未上线</span>
+              </div>
+              <div class="panel-body">
+                <dl class="kv">
+                  <dt>前端路由</dt><dd><code class="code" data-reserved-route>/system/api-keys</code></dd>
+                  <dt>所需权限</dt><dd><code class="code" data-reserved-code>apikey:view</code></dd>
+                  <dt>菜单可见</dt><dd>由该权限码控制；无权限时整个入口不渲染</dd>
+                  <dt>路由守卫</dt><dd>直接输入 URL 时校验权限，失败跳转 403</dd>
+                  <dt>后端接口</dt><dd class="muted">尚未实现，列表、创建、启停与删除均无接口</dd>
+                </dl>
+                <div class="note note--warn" style="margin-top:14px;">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+                  <span>管理员在角色配置中勾选该权限，只会改变菜单与路由可见性，不会产生对应的接口能力。</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-head"><h2>模块上线前必须完成</h2></div>
+              <div class="panel-body">
+                <ol class="steps">
+                  <li>
+                    <div>
+                      <div class="h">声明权限码</div>
+                      <div class="d">接口显式声明 <code class="code">apikey:view</code> 等权限码；未登记权限的接口默认拒绝。</div>
+                    </div>
+                  </li>
+                  <li>
+                    <div>
+                      <div class="h">接入数据过滤</div>
+                      <div class="d">若资源有归属，创建时写入 owner_id，列表与详情接入数据访问判定；平台级资源可明确标注不隔离。</div>
+                    </div>
+                  </li>
+                  <li>
+                    <div>
+                      <div class="h">纳入覆盖率测试</div>
+                      <div class="d">鉴权覆盖率测试遍历全部 /api/v1 路由，未声明权限且不在白名单时测试失败。</div>
+                    </div>
+                  </li>
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          <div class="detail-stack">
+            <div class="panel">
+              <div class="panel-head"><h2>当前身份</h2></div>
+              <div class="panel-body">
+                <div class="owner-card">
+                  <span class="seal seal--lg" aria-hidden="true" data-me-initial>陈</span>
+                  <div>
+                    <div class="who"><span data-me-name>陈晓</span></div>
+                    <div class="meta"><span data-me-role>管理员</span> · 可以进入本页</div>
+                  </div>
+                </div>
+                <p class="muted" style="font-size:12px;margin-top:12px;line-height:1.7;">
+                  换成只读身份后，侧边栏不会出现本模块；直接打开本页会被路由守卫导向 403。
+                </p>
+                <a class="btn" href="forbidden.html?need=apikey:view&from=reserved.html" style="margin-top:10px;">预览无权限结果</a>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-head"><h2>路由映射</h2></div>
+              <div class="panel-body">
+                <table class="route-map">
+                  <thead><tr><th>方法</th><th>路径</th><th style="text-align:right;">权限</th></tr></thead>
+                  <tbody>
+                    <tr><td class="m">GET</td><td class="r">/system/api-keys</td><td class="p"><code class="code">apikey:view</code></td></tr>
+                    <tr><td class="m">POST</td><td class="r">/system/api-keys</td><td class="p"><code class="code">apikey:create</code></td></tr>
+                    <tr><td class="m">PATCH</td><td class="r">/system/api-keys/:id</td><td class="p"><code class="code">apikey:update</code></td></tr>
+                    <tr><td class="m">DELETE</td><td class="r">/system/api-keys/:id</td><td class="p"><code class="code">apikey:delete</code></td></tr>
+                  </tbody>
+                </table>
+                <p class="faint" style="font-size:11px;margin-top:8px;">以上为规划中的映射，接口与权限声明同时上线。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

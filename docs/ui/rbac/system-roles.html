@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>角色管理 · 辰光 Agent</title>
+<link rel="stylesheet" href="assets/app.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body data-page="system-roles" data-crumb="系统管理|角色管理" data-page-perm="role:view">
+<a class="skip-link" href="#main">跳到主要内容</a>
+<div class="shell">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="main">
+    <header class="topbar" id="topbar"></header>
+    <main class="content" id="main">
+      <div class="page">
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">角色管理</h1>
+            <p class="page-desc">功能权限与数据范围在同一个配置弹窗的两个 Tab 中完成。保存后失效该角色下所有用户的缓存，下一次请求立即生效。</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn--primary" type="button" data-perm="role:create" data-toast-message="已打开创建角色表单（原型模拟）">创建角色</button>
+          </div>
+        </div>
+
+        <div class="context-strip" data-context></div>
+
+        <div class="toolbar">
+          <label class="search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/></svg>
+            <input type="search" placeholder="搜索角色名称或编码" data-filter-table aria-label="搜索角色">
+          </label>
+          <span class="spacer"></span>
+          <span class="faint" style="font-size:11.5px;">4 个内置角色 · 1 个自定义角色</span>
+        </div>
+
+        <div class="surface">
+          <div class="table-scroll">
+            <table class="table" data-count-table>
+              <thead>
+                <tr>
+                  <th>角色</th>
+                  <th>描述</th>
+                  <th>类型</th>
+                  <th>用户数</th>
+                  <th>权限数</th>
+                  <th>数据范围（摘要）</th>
+                  <th class="actions">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="name">管理员</span><span class="sub mono">admin</span></td>
+                  <td class="muted">平台负责人，全部功能与全部数据</td>
+                  <td><span class="tag tag--system">内置</span></td>
+                  <td class="num">1</td>
+                  <td class="num">47</td>
+                  <td class="muted">查看全部 / 管理全部</td>
+                  <td class="actions">
+                    <button class="btn btn--sm btn--quiet" type="button" data-perm="role:update" data-open="role-config" data-role="admin">配置</button>
+                    <button class="btn btn--sm btn--danger" type="button" disabled title="内置角色不可删除">删除</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="name">开发者</span><span class="sub mono">developer</span></td>
+                  <td class="muted">创建与调试 Agent、Prompt、知识库、工具</td>
+                  <td><span class="tag tag--system">内置</span></td>
+                  <td class="num">3</td>
+                  <td class="num">18</td>
+                  <td class="muted">查看全部 / 管理本人</td>
+                  <td class="actions">
+                    <button class="btn btn--sm btn--quiet" type="button" data-perm="role:update" data-open="role-config" data-role="developer">配置</button>
+                    <button class="btn btn--sm btn--danger" type="button" disabled title="内置角色不可删除">删除</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="name">运营</span><span class="sub mono">operator</span></td>
+                  <td class="muted">查看业务数据，维护知识库内容</td>
+                  <td><span class="tag tag--system">内置</span></td>
+                  <td class="num">2</td>
+                  <td class="num">9</td>
+                  <td class="muted">知识库管理全部，其余管理本人</td>
+                  <td class="actions">
+                    <button class="btn btn--sm btn--quiet" type="button" data-perm="role:update" data-open="role-config" data-role="operator">配置</button>
+                    <button class="btn btn--sm btn--danger" type="button" disabled title="内置角色不可删除">删除</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="name">只读</span><span class="sub mono">viewer</span></td>
+                  <td class="muted">仅查看，不产生任何变更</td>
+                  <td><span class="tag tag--system">内置</span></td>
+                  <td class="num">2</td>
+                  <td class="num">7</td>
+                  <td class="muted">查看全部 / 管理本人</td>
+                  <td class="actions">
+                    <button class="btn btn--sm btn--quiet" type="button" data-perm="role:update" data-open="role-config" data-role="viewer">配置</button>
+                    <button class="btn btn--sm btn--danger" type="button" disabled title="内置角色不可删除">删除</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="name">数据标注员</span><span class="sub mono">data-labeler</span></td>
+                  <td class="muted">知识库分段标注与 Prompt 预览</td>
+                  <td><span class="tag">自定义</span></td>
+                  <td class="num">1</td>
+                  <td class="num">4</td>
+                  <td class="muted">查看本人 / 管理本人</td>
+                  <td class="actions">
+                    <button class="btn btn--sm btn--quiet" type="button" data-perm="role:update" data-open="role-config" data-role="labeler">配置</button>
+                    <button class="btn btn--sm btn--danger" type="button" disabled title="该角色下仍有 1 名用户，需先解绑">删除</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-foot">
+            <span class="note">
+              内置角色不可删除、编码不可修改；自定义角色仍有用户时不可删除
+              <span class="dot-sep" aria-hidden="true"></span>
+              保存前提示影响用户数
+            </span>
+          </div>
+        </div>
+
+        <div class="note" style="margin-top:14px;">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+          <span>点击任一行的「配置」可以打开对应角色的双 Tab 弹窗。矩阵中的对话日志、数据统计、API 密钥、审计、告警与系统配置为预留模块，勾选只影响菜单与路由。</span>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- 角色配置弹窗 -->
+<div class="overlay" data-dialog="role-config" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="role-config-title">
+    <div class="modal-head">
+      <div>
+        <h2 id="role-config-title">配置角色：<span data-role-name>开发者</span></h2>
+        <div class="sub">保存后该角色下 <b data-role-users>3</b> 名用户的下一次请求立即生效</div>
+      </div>
+      <button class="modal-close" type="button" data-close aria-label="关闭">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+
+    <div data-tabs>
+      <div class="tabs" role="tablist" aria-label="角色配置">
+        <button class="tab is-active" type="button" role="tab" aria-selected="true" data-tab="perm">
+          功能权限 <span class="count" data-selected-count>18</span>
+        </button>
+        <button class="tab" type="button" role="tab" aria-selected="false" data-tab="scope">数据范围</button>
+      </div>
+
+      <div class="tabpanel" data-tabpanel="perm">
+        <div class="matrix-wrap">
+          <table class="matrix">
+            <thead>
+              <tr>
+                <th scope="col">模块</th>
+                <th scope="col">查看</th>
+                <th scope="col">创建</th>
+                <th scope="col">编辑</th>
+                <th scope="col">删除</th>
+                <th scope="col">发布</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"><span class="mod">Agent 管理</span><span class="mod-code">agent</span></th>
+                <td><button class="check is-on" type="button" data-code="agent:view" data-count aria-pressed="true" aria-label="Agent 查看"></button></td>
+                <td><button class="check is-on" type="button" data-code="agent:create" data-count aria-pressed="true" aria-label="Agent 创建"></button></td>
+                <td><button class="check is-on" type="button" data-code="agent:update" data-count aria-pressed="true" aria-label="Agent 编辑"></button></td>
+                <td><button class="check" type="button" data-code="agent:delete" data-count aria-pressed="false" aria-label="Agent 删除"></button></td>
+                <td><button class="check is-on" type="button" data-code="agent:publish" data-count aria-pressed="true" aria-label="Agent 发布"></button></td>
+              </tr>
+              <tr>
+                <th scope="row"><span class="mod">模型管理</span><span class="mod-code">model</span></th>
+                <td><button class="check is-on" type="button" data-code="model:view" data-count aria-pressed="true" aria-label="模型查看"></button></td>
+                <td><button class="check" type="button" data-code="model:create" data-count aria-pressed="false" aria-label="模型创建"></button></td>
+                <td><button class="check" type="button" data-code="model:update" data-count aria-pressed="false" aria-label="模型编辑"></button></td>
+                <td><button class="check" type="button" data-code="model:delete" data-count aria-pressed="false" aria-label="模型删除"></button></td>
+                <td><span class="check is-na" aria-label="不适用">—</span></td>
+              </tr>
+              <tr>
+                <th scope="row"><span class="mod">Prompt 管理</span><span class="mod-code">prompt</span></th>
+                <td><button class="check is-on" type="button" data-code="prompt:view" data-count aria-pressed="true" aria-label="Prompt 查看"></button></td>
+                <td><button class="check is-on" type="button" data-code="prompt:create" data-count aria-pressed="true" aria-label="Prompt 创建"></button></td>
+                <td><button class="check is-on" type="button" data-code="prompt:update" data-count aria-pressed="true" aria-label="Prompt 编辑"></button></td>
+                <td><button class="check is-on" type="button" data-code="prompt:delete" data-count aria-pressed="true" aria-label="Prompt 删除"></button></td>
+                <td><button class="check is-on" type="button" data-code="prompt:publish" data-count aria-pressed="true" aria-label="Prompt 发布"></button></td>
+              </tr>
+              <tr>
+                <th scope="row"><span class="mod">知识库管理</span><span class="mod-code">knowledge</span></th>
+                <td><button class="check is-on" type="button" data-code="knowledge:view" data-count aria-pressed="true" aria-label="知识库查看"></button></td>
+                <td><button class="check is-on" type="button" data-code="knowledge:create" data-count aria-pressed="true" aria-label="知识库创建"></button></td>
+                <td><button class="check is-on" type="button" data-code="knowledge:update" data-count aria-pressed="true" aria-label="知识库编辑"></button></td>
+                <td><button class="check" type="button" data-code="knowledge:delete" data-count aria-pressed="false" aria-label="知识库删除"></button></td>
+                <td><span class="check is-na" aria-label="不适用">—</span></td>
+              </tr>
+              <tr>
+                <th scope="row"><span class="mod">工具管理</span><span class="mod-code">tool</span></th>
+                <td><button class="check is-on" type="button" data-code="tool:view" data-count aria-pressed="true" aria-label="工具查看"></button></td>
+                <td><button class="check is-on" type="button" data-code="tool:create" data-count aria-pressed="true" aria-label="工具创建"></button></td>
+                <td><button class="check is-on" type="button" data-code="tool:update" data-count aria-pressed="true" aria-label="工具编辑"></button></td>
+                <td><button class="check" type="button" data-code="tool:delete" data-count aria-pressed="false" aria-label="工具删除"></button></td>
+                <td><span class="check is-na" aria-label="不适用">—</span></td>
+              </tr>
+              <tr class="is-reserved">
+                <th scope="row"><span class="mod">对话日志 <span class="tag tag--reserved">待上线</span></span><span class="mod-code">conversation</span></th>
+                <td><button class="check is-on" type="button" data-code="conversation:view" data-count aria-pressed="true" aria-label="对话日志查看"></button></td>
+                <td><span class="check is-na" aria-label="不适用">—</span></td>
+                <td><span class="check is-na" aria-label="不适用">—</span></td>
+                <td><span class="check is-na" aria-label="不适用">—</span></td>
+                <td><span class="check is-na" aria-label="不适用">—</span></td>
+              </tr>
+              <tr class="is-reserved">
+                <th scope="row"><span class="mod">数据统计 <span class="tag tag--reserved">待上线</span></span><span class="mod-code">analytics</span></th>
+                <td><button class="check is-on" type="button" data-code="analytics:view" data-count aria-pressed="true" aria-label="数据统计查看"></button></td>
+                <td><span class="check is-na" aria-label="不适用">—</span></td>
+                <td><span class="check is-na" aria-label="不适用">—</span></td>
+                <td><span class="check is-na" aria-label="不适用">—</span></td>
+                <td><span class="check is-na" aria-label="不适用">—</span></td>
+              </tr>
+              <tr>
+                <th scope="row"><span class="mod">用户管理</span><span class="mod-code">user</span></th>
+                <td><button class="check" type="button" data-code="user:view" data-count aria-pressed="false" aria-label="用户查看"></button></td>
+                <td><button class="check" type="button" data-code="user:create" data-count aria-pressed="false" aria-label="用户创建"></button></td>
+                <td><button class="check" type="button" data-code="user:update" data-count aria-pressed="false" aria-label="用户编辑"></button></td>
+                <td><button class="check" type="button" data-code="user:delete" data-count aria-pressed="false" aria-label="用户删除"></button></td>
+                <td><span class="check is-na" aria-label="不适用">—</span></td>
+              </tr>
+              <tr>
+                <th scope="row"><span class="mod">角色管理</span><span class="mod-code">role</span></th>
+                <td><button class="check" type="button" data-code="role:view" data-count aria-pressed="false" aria-label="角色查看"></button></td>
+                <td><button class="check" type="button" data-code="role:create" data-count aria-pressed="false" aria-label="角色创建"></button></td>
+                <td><button class="check" type="button" data-code="role:update" data-count aria-pressed="false" aria-label="角色编辑"></button></td>
+                <td><button class="check" type="button" data-code="role:delete" data-count aria-pressed="false" aria-label="角色删除"></button></td>
+                <td><span class="check is-na" aria-label="不适用">—</span></td>
+              </tr>
+              <tr>
+                <th scope="row"><span class="mod">权限目录</span><span class="mod-code">permission</span></th>
+                <td><button class="check" type="button" data-code="permission:view" data-count aria-pressed="false" aria-label="权限查看"></button></td>
+                <td><button class="check" type="button" data-code="permission:create" data-count aria-pressed="false" aria-label="权限创建"></button></td>
+                <td><button class="check" type="button" data-code="permission:update" data-count aria-pressed="false" aria-label="权限编辑"></button></td>
+                <td><button class="check" type="button" data-code="permission:delete" data-count aria-pressed="false" aria-label="权限删除"></button></td>
+                <td><span class="check is-na" aria-label="不适用">—</span></td>
+              </tr>
+              <tr class="is-reserved">
+                <th scope="row"><span class="mod">API 密钥 <span class="tag tag--reserved">待上线</span></span><span class="mod-code">apikey</span></th>
+                <td><button class="check" type="button" data-code="apikey:view" data-count aria-pressed="false" aria-label="API 密钥查看"></button></td>
+                <td><button class="check" type="button" data-code="apikey:create" data-count aria-pressed="false" aria-label="API 密钥创建"></button></td>
+                <td><button class="check" type="button" data-code="apikey:update" data-count aria-pressed="false" aria-label="API 密钥编辑"></button></td>
+                <td><button class="check" type="button" data-code="apikey:delete" data-count aria-pressed="false" aria-label="API 密钥删除"></button></td>
+                <td><span class="check is-na" aria-label="不适用">—</span></td>
+              </tr>
+              <tr class="is-reserved">
+                <th scope="row"><span class="mod">审计日志 <span class="tag tag--reserved">待上线</span></span><span class="mod-code">audit</span></th>
+                <td><button class="check" type="button" data-code="audit:view" data-count aria-pressed="false" aria-label="审计日志查看"></button></td>
+                <td><span class="check is-na" aria-label="不适用">—</span></td>
+                <td><span class="check is-na" aria-label="不适用">—</span></td>
+                <td><span class="check is-na" aria-label="不适用">—</span></td>
+                <td><span class="check is-na" aria-label="不适用">—</span></td>
+              </tr>
+              <tr class="is-reserved">
+                <th scope="row"><span class="mod">告警规则 <span class="tag tag--reserved">待上线</span></span><span class="mod-code">alert</span></th>
+                <td><button class="check" type="button" data-code="alert:view" data-count aria-pressed="false" aria-label="告警规则查看"></button></td>
+                <td><button class="check" type="button" data-code="alert:create" data-count aria-pressed="false" aria-label="告警规则创建"></button></td>
+                <td><button class="check" type="button" data-code="alert:update" data-count aria-pressed="false" aria-label="告警规则编辑"></button></td>
+                <td><button class="check" type="button" data-code="alert:delete" data-count aria-pressed="false" aria-label="告警规则删除"></button></td>
+                <td><span class="check is-na" aria-label="不适用">—</span></td>
+              </tr>
+              <tr class="is-reserved">
+                <th scope="row"><span class="mod">系统配置 <span class="tag tag--reserved">待上线</span></span><span class="mod-code">settings</span></th>
+                <td><button class="check" type="button" data-code="settings:view" data-count aria-pressed="false" aria-label="系统配置查看"></button></td>
+                <td><span class="check is-na" aria-label="不适用">—</span></td>
+                <td><button class="check" type="button" data-code="settings:update" data-count aria-pressed="false" aria-label="系统配置编辑"></button></td>
+                <td><span class="check is-na" aria-label="不适用">—</span></td>
+                <td><span class="check is-na" aria-label="不适用">—</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note" style="margin-top:10px;">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+          <span>斜纹行为预留模块，勾选只影响菜单与路由；接口上线后必须同步声明权限码并纳入覆盖率测试。</span>
+        </div>
+      </div>
+
+      <div class="tabpanel" data-tabpanel="scope" hidden>
+        <table class="scope-table">
+          <thead>
+            <tr><th>资源</th><th>查看范围</th><th>管理范围</th></tr>
+          </thead>
+          <tbody>
+            <tr data-scope-res="agent">
+              <td class="res-name">Agent <code class="code">agent</code></td>
+              <td>
+                <select class="select select--sm" data-scope-dim="view" data-scope-select aria-label="Agent 查看范围">
+                  <option value="ALL">全部数据</option>
+                  <option value="SELF">仅本人</option>
+                  <option value="CUSTOM">指定用户/角色</option>
+                </select>
+              </td>
+              <td>
+                <select class="select select--sm" data-scope-dim="manage" aria-label="Agent 管理范围">
+                  <option value="ALL">全部数据</option>
+                  <option value="SELF" selected>仅本人</option>
+                  <option value="CUSTOM">指定用户/角色</option>
+                </select>
+              </td>
+            </tr>
+            <tr data-scope-res="prompt">
+              <td class="res-name">Prompt <code class="code">prompt</code></td>
+              <td>
+                <select class="select select--sm" data-scope-dim="view" data-scope-select aria-label="Prompt 查看范围">
+                  <option value="ALL">全部数据</option>
+                  <option value="SELF">仅本人</option>
+                  <option value="CUSTOM">指定用户/角色</option>
+                </select>
+              </td>
+              <td>
+                <select class="select select--sm" data-scope-dim="manage" aria-label="Prompt 管理范围">
+                  <option value="ALL">全部数据</option>
+                  <option value="SELF" selected>仅本人</option>
+                  <option value="CUSTOM">指定用户/角色</option>
+                </select>
+              </td>
+            </tr>
+            <tr data-scope-res="knowledge">
+              <td class="res-name">知识库 <code class="code">knowledge</code></td>
+              <td>
+                <select class="select select--sm" data-scope-dim="view" data-scope-select aria-label="知识库查看范围">
+                  <option value="ALL">全部数据</option>
+                  <option value="SELF">仅本人</option>
+                  <option value="CUSTOM" selected>指定用户/角色</option>
+                </select>
+                <div class="targets" data-targets>
+                  <span class="target">张三 <span class="faint">用户</span><button type="button" data-toast-message="已移除指定用户张三（原型模拟）" aria-label="移除张三">×</button></span>
+                  <span class="target">李四 <span class="faint">用户</span><button type="button" data-toast-message="已移除指定用户李四（原型模拟）" aria-label="移除李四">×</button></span>
+                  <span class="target">运营 <span class="faint">角色</span><button type="button" data-toast-message="已移除指定角色运营（原型模拟）" aria-label="移除运营角色">×</button></span>
+                  <button class="target-add" type="button" data-toast-message="已打开用户与角色选择器（原型模拟）">添加用户或角色</button>
+                </div>
+              </td>
+              <td>
+                <select class="select select--sm" data-scope-dim="manage" aria-label="知识库管理范围">
+                  <option value="ALL">全部数据</option>
+                  <option value="SELF" selected>仅本人</option>
+                  <option value="CUSTOM">指定用户/角色</option>
+                </select>
+              </td>
+            </tr>
+            <tr data-scope-res="tool">
+              <td class="res-name">工具 <code class="code">tool</code></td>
+              <td>
+                <select class="select select--sm" data-scope-dim="view" data-scope-select aria-label="工具查看范围">
+                  <option value="ALL">全部数据</option>
+                  <option value="SELF">仅本人</option>
+                  <option value="CUSTOM">指定用户/角色</option>
+                </select>
+              </td>
+              <td>
+                <select class="select select--sm" data-scope-dim="manage" aria-label="工具管理范围">
+                  <option value="ALL">全部数据</option>
+                  <option value="SELF" selected>仅本人</option>
+                  <option value="CUSTOM">指定用户/角色</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note" style="margin-top:10px;">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+          <span>数据范围只影响“哪些数据”，不替代功能权限。CUSTOM 表示指定用户与指定角色创建的数据；按查询时的角色归属实时计算。</span>
+        </div>
+        <div class="note" style="margin-top:8px;">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="1"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+          <span>当前展示的是一次示例调整：知识库查看范围使用指定用户与角色。内置默认值为“查看全部 / 管理本人”。</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-foot">
+      <span class="meta">已选 <b data-selected-count>18</b> 项 / 该角色下 <b data-role-users>3</b> 名用户</span>
+      <div class="right">
+        <button class="btn" type="button" data-close>取消</button>
+        <button class="btn btn--primary" type="button" data-close data-toast-message="配置已更新，对该角色下用户立即生效">保存配置</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

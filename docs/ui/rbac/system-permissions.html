@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>权限目录 · 辰光 Agent</title>
+<link rel="stylesheet" href="assets/app.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body data-page="system-permissions" data-crumb="系统管理|权限目录" data-page-perm="permission:view">
+<a class="skip-link" href="#main">跳到主要内容</a>
+<div class="shell">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="main">
+    <header class="topbar" id="topbar"></header>
+    <main class="content" id="main">
+      <div class="page">
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">权限目录<span class="qualifier">只读</span></h1>
+            <p class="page-desc">权限码与后端执行点强耦合，管理端不提供新增、编辑与删除。页面只展示目录、模块分组与上线状态。</p>
+          </div>
+          <div class="page-actions">
+            <a class="btn" href="system-roles.html">去角色配置</a>
+          </div>
+        </div>
+
+        <div class="context-strip" data-context></div>
+
+        <div class="note" style="margin-bottom:14px;">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="1"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+          <span><strong>权限目录由系统维护。</strong>新增权限随版本升级通过数据库迁移完成；迁移后清空权限缓存。预留权限只用于前端菜单与路由控制。</span>
+        </div>
+
+        <div class="toolbar">
+          <label class="search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/></svg>
+            <input type="search" placeholder="搜索权限码或名称" data-filter-table aria-label="搜索权限">
+          </label>
+          <select class="select" data-filter-module aria-label="按模块筛选">
+            <option value="">全部模块</option>
+            <option value="Agent">Agent</option>
+            <option value="模型">模型</option>
+            <option value="Prompt">Prompt</option>
+            <option value="知识库">知识库</option>
+            <option value="工具">工具</option>
+            <option value="对话日志">对话日志</option>
+            <option value="数据统计">数据统计</option>
+            <option value="用户管理">用户管理</option>
+            <option value="角色管理">角色管理</option>
+            <option value="权限管理">权限管理</option>
+            <option value="API 密钥">API 密钥</option>
+            <option value="审计日志">审计日志</option>
+            <option value="告警规则">告警规则</option>
+            <option value="系统配置">系统配置</option>
+          </select>
+          <span class="spacer"></span>
+          <span class="faint" style="font-size:11.5px;">47 条权限 · 34 条已上线 · 13 条预留</span>
+        </div>
+
+        <div class="surface">
+          <div class="table-scroll">
+            <table class="table" data-count-table>
+              <thead>
+                <tr>
+                  <th>模块</th>
+                  <th>权限码</th>
+                  <th>名称</th>
+                  <th>动作</th>
+                  <th>状态</th>
+                  <th>说明</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-module="Agent">
+                  <td><span class="name">Agent</span></td>
+                  <td><code class="code">agent:view</code></td>
+                  <td>查看 Agent</td>
+                  <td><code class="code code--plain">view</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">列表、详情与版本列表</td>
+                </tr>
+                <tr data-module="Agent">
+                  <td></td>
+                  <td><code class="code">agent:create</code></td>
+                  <td>创建 Agent</td>
+                  <td><code class="code code--plain">create</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">新建 Agent，写入 owner_id</td>
+                </tr>
+                <tr data-module="Agent">
+                  <td></td>
+                  <td><code class="code">agent:update</code></td>
+                  <td>编辑 Agent / 启停</td>
+                  <td><code class="code code--plain">update</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">编辑配置、启动与停止</td>
+                </tr>
+                <tr data-module="Agent">
+                  <td></td>
+                  <td><code class="code">agent:delete</code></td>
+                  <td>删除 Agent</td>
+                  <td><code class="code code--plain">delete</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">需同时具备管理数据权限</td>
+                </tr>
+                <tr data-module="Agent">
+                  <td></td>
+                  <td><code class="code">agent:publish</code></td>
+                  <td>发布 / 回滚版本</td>
+                  <td><code class="code code--plain">publish</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">发布会创建版本快照</td>
+                </tr>
+
+                <tr data-module="模型" style="border-top:1px solid var(--line-strong);">
+                  <td><span class="name">模型</span></td>
+                  <td><code class="code">model:view</code></td>
+                  <td>查看模型与供应商</td>
+                  <td><code class="code code--plain">view</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">平台级资源，不做数据隔离</td>
+                </tr>
+                <tr data-module="模型">
+                  <td></td>
+                  <td><code class="code">model:create</code></td>
+                  <td>添加模型 / 供应商</td>
+                  <td><code class="code code--plain">create</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">包含供应商凭据配置</td>
+                </tr>
+                <tr data-module="模型">
+                  <td></td>
+                  <td><code class="code">model:update</code></td>
+                  <td>编辑模型 / 测试连接</td>
+                  <td><code class="code code--plain">update</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">测试连接归入 update</td>
+                </tr>
+                <tr data-module="模型">
+                  <td></td>
+                  <td><code class="code">model:delete</code></td>
+                  <td>删除模型 / 供应商</td>
+                  <td><code class="code code--plain">delete</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">被 Agent 引用时拒绝删除</td>
+                </tr>
+
+                <tr data-module="Prompt" style="border-top:1px solid var(--line-strong);">
+                  <td><span class="name">Prompt</span></td>
+                  <td><code class="code">prompt:view</code></td>
+                  <td>查看 Prompt</td>
+                  <td><code class="code code--plain">view</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">列表、详情与版本</td>
+                </tr>
+                <tr data-module="Prompt">
+                  <td></td>
+                  <td><code class="code">prompt:create</code></td>
+                  <td>创建 Prompt</td>
+                  <td><code class="code code--plain">create</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">写入 owner_id</td>
+                </tr>
+                <tr data-module="Prompt">
+                  <td></td>
+                  <td><code class="code">prompt:update</code></td>
+                  <td>编辑 Prompt</td>
+                  <td><code class="code code--plain">update</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">保存草稿与配置</td>
+                </tr>
+                <tr data-module="Prompt">
+                  <td></td>
+                  <td><code class="code">prompt:delete</code></td>
+                  <td>删除 Prompt</td>
+                  <td><code class="code code--plain">delete</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">开发者默认持有</td>
+                </tr>
+                <tr data-module="Prompt">
+                  <td></td>
+                  <td><code class="code">prompt:publish</code></td>
+                  <td>发布 / 回滚版本</td>
+                  <td><code class="code code--plain">publish</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">版本快照</td>
+                </tr>
+
+                <tr data-module="知识库" style="border-top:1px solid var(--line-strong);">
+                  <td><span class="name">知识库</span></td>
+                  <td><code class="code">knowledge:view</code></td>
+                  <td>查看知识库 / 文档 / 分段</td>
+                  <td><code class="code code--plain">view</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">含检索测试</td>
+                </tr>
+                <tr data-module="知识库">
+                  <td></td>
+                  <td><code class="code">knowledge:create</code></td>
+                  <td>创建知识库 / 上传文档</td>
+                  <td><code class="code code--plain">create</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">上传仍需知识库管理权限</td>
+                </tr>
+                <tr data-module="知识库">
+                  <td></td>
+                  <td><code class="code">knowledge:update</code></td>
+                  <td>编辑配置 / 分段 / 重试</td>
+                  <td><code class="code code--plain">update</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">继承知识库数据判定</td>
+                </tr>
+                <tr data-module="知识库">
+                  <td></td>
+                  <td><code class="code">knowledge:delete</code></td>
+                  <td>删除知识库 / 文档 / 分段</td>
+                  <td><code class="code code--plain">delete</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">开发者默认不持有</td>
+                </tr>
+
+                <tr data-module="工具" style="border-top:1px solid var(--line-strong);">
+                  <td><span class="name">工具</span></td>
+                  <td><code class="code">tool:view</code></td>
+                  <td>查看工具</td>
+                  <td><code class="code code--plain">view</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">列表与详情</td>
+                </tr>
+                <tr data-module="工具">
+                  <td></td>
+                  <td><code class="code">tool:create</code></td>
+                  <td>注册工具</td>
+                  <td><code class="code code--plain">create</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">写入 owner_id</td>
+                </tr>
+                <tr data-module="工具">
+                  <td></td>
+                  <td><code class="code">tool:update</code></td>
+                  <td>编辑 / 启停 / 测试工具</td>
+                  <td><code class="code code--plain">update</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">测试调用归入 update</td>
+                </tr>
+                <tr data-module="工具">
+                  <td></td>
+                  <td><code class="code">tool:delete</code></td>
+                  <td>删除工具</td>
+                  <td><code class="code code--plain">delete</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">需管理数据权限</td>
+                </tr>
+
+                <tr data-module="对话日志" style="border-top:1px solid var(--line-strong);">
+                  <td><span class="name">对话日志</span></td>
+                  <td><code class="code">conversation:view</code></td>
+                  <td>查看对话记录</td>
+                  <td><code class="code code--plain">view</code></td>
+                  <td><span class="tag tag--reserved">未上线</span></td>
+                  <td class="muted">跟随所属 Agent 的可见性</td>
+                </tr>
+
+                <tr data-module="数据统计" style="border-top:1px solid var(--line-strong);">
+                  <td><span class="name">数据统计</span></td>
+                  <td><code class="code">analytics:view</code></td>
+                  <td>查看用量与费用统计</td>
+                  <td><code class="code code--plain">view</code></td>
+                  <td><span class="tag tag--reserved">未上线</span></td>
+                  <td class="muted">仅聚合可见数据</td>
+                </tr>
+
+                <tr data-module="用户管理" style="border-top:1px solid var(--line-strong);">
+                  <td><span class="name">用户管理</span></td>
+                  <td><code class="code">user:view</code></td>
+                  <td>查看用户</td>
+                  <td><code class="code code--plain">view</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">平台级资源</td>
+                </tr>
+                <tr data-module="用户管理">
+                  <td></td>
+                  <td><code class="code">user:create</code></td>
+                  <td>创建用户</td>
+                  <td><code class="code code--plain">create</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">含初始密码设置</td>
+                </tr>
+                <tr data-module="用户管理">
+                  <td></td>
+                  <td><code class="code">user:update</code></td>
+                  <td>编辑用户 / 分配角色</td>
+                  <td><code class="code code--plain">update</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">保存后立即失效缓存</td>
+                </tr>
+                <tr data-module="用户管理">
+                  <td></td>
+                  <td><code class="code">user:delete</code></td>
+                  <td>删除用户</td>
+                  <td><code class="code code--plain">delete</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">有资源时拒绝删除</td>
+                </tr>
+
+                <tr data-module="角色管理" style="border-top:1px solid var(--line-strong);">
+                  <td><span class="name">角色管理</span></td>
+                  <td><code class="code">role:view</code></td>
+                  <td>查看角色</td>
+                  <td><code class="code code--plain">view</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">含用户数与权限数</td>
+                </tr>
+                <tr data-module="角色管理">
+                  <td></td>
+                  <td><code class="code">role:create</code></td>
+                  <td>创建角色</td>
+                  <td><code class="code code--plain">create</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">不可重复内置编码</td>
+                </tr>
+                <tr data-module="角色管理">
+                  <td></td>
+                  <td><code class="code">role:update</code></td>
+                  <td>编辑角色 / 分配权限 / 数据范围</td>
+                  <td><code class="code code--plain">update</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">全量覆盖并失效缓存</td>
+                </tr>
+                <tr data-module="角色管理">
+                  <td></td>
+                  <td><code class="code">role:delete</code></td>
+                  <td>删除角色</td>
+                  <td><code class="code code--plain">delete</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">内置角色拒绝；需先解绑用户</td>
+                </tr>
+
+                <tr data-module="权限管理" style="border-top:1px solid var(--line-strong);">
+                  <td><span class="name">权限管理</span></td>
+                  <td><code class="code">permission:view</code></td>
+                  <td>查看权限目录</td>
+                  <td><code class="code code--plain">view</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">管理端只读</td>
+                </tr>
+                <tr data-module="权限管理">
+                  <td></td>
+                  <td><code class="code">permission:create</code></td>
+                  <td>创建权限</td>
+                  <td><code class="code code--plain">create</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">管理端不开放入口</td>
+                </tr>
+                <tr data-module="权限管理">
+                  <td></td>
+                  <td><code class="code">permission:update</code></td>
+                  <td>编辑权限</td>
+                  <td><code class="code code--plain">update</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">管理端不开放入口</td>
+                </tr>
+                <tr data-module="权限管理">
+                  <td></td>
+                  <td><code class="code">permission:delete</code></td>
+                  <td>删除权限</td>
+                  <td><code class="code code--plain">delete</code></td>
+                  <td><span class="tag tag--live">已实现</span></td>
+                  <td class="muted">管理端不开放入口</td>
+                </tr>
+
+                <tr data-module="API 密钥" style="border-top:1px solid var(--line-strong);">
+                  <td><span class="name">API 密钥</span></td>
+                  <td><code class="code">apikey:view</code></td>
+                  <td>查看 API Key</td>
+                  <td><code class="code code--plain">view</code></td>
+                  <td><span class="tag tag--reserved">未上线</span></td>
+                  <td class="muted">本期仅菜单与路由控制</td>
+                </tr>
+                <tr data-module="API 密钥">
+                  <td></td>
+                  <td><code class="code">apikey:create</code></td>
+                  <td>创建 API Key</td>
+                  <td><code class="code code--plain">create</code></td>
+                  <td><span class="tag tag--reserved">未上线</span></td>
+                  <td class="muted">后续单独立项</td>
+                </tr>
+                <tr data-module="API 密钥">
+                  <td></td>
+                  <td><code class="code">apikey:update</code></td>
+                  <td>启用 / 禁用 API Key</td>
+                  <td><code class="code code--plain">update</code></td>
+                  <td><span class="tag tag--reserved">未上线</span></td>
+                  <td class="muted">后续单独立项</td>
+                </tr>
+                <tr data-module="API 密钥">
+                  <td></td>
+                  <td><code class="code">apikey:delete</code></td>
+                  <td>删除 API Key</td>
+                  <td><code class="code code--plain">delete</code></td>
+                  <td><span class="tag tag--reserved">未上线</span></td>
+                  <td class="muted">后续单独立项</td>
+                </tr>
+
+                <tr data-module="审计日志" style="border-top:1px solid var(--line-strong);">
+                  <td><span class="name">审计日志</span></td>
+                  <td><code class="code">audit:view</code></td>
+                  <td>查看审计日志</td>
+                  <td><code class="code code--plain">view</code></td>
+                  <td><span class="tag tag--reserved">未上线</span></td>
+                  <td class="muted">越权访问目前仅写应用日志</td>
+                </tr>
+
+                <tr data-module="告警规则" style="border-top:1px solid var(--line-strong);">
+                  <td><span class="name">告警规则</span></td>
+                  <td><code class="code">alert:view</code></td>
+                  <td>查看告警规则</td>
+                  <td><code class="code code--plain">view</code></td>
+                  <td><span class="tag tag--reserved">未上线</span></td>
+                  <td class="muted">本期仅菜单与路由控制</td>
+                </tr>
+                <tr data-module="告警规则">
+                  <td></td>
+                  <td><code class="code">alert:create</code></td>
+                  <td>创建告警规则</td>
+                  <td><code class="code code--plain">create</code></td>
+                  <td><span class="tag tag--reserved">未上线</span></td>
+                  <td class="muted">本期仅菜单与路由控制</td>
+                </tr>
+                <tr data-module="告警规则">
+                  <td></td>
+                  <td><code class="code">alert:update</code></td>
+                  <td>编辑告警规则</td>
+                  <td><code class="code code--plain">update</code></td>
+                  <td><span class="tag tag--reserved">未上线</span></td>
+                  <td class="muted">本期仅菜单与路由控制</td>
+                </tr>
+                <tr data-module="告警规则">
+                  <td></td>
+                  <td><code class="code">alert:delete</code></td>
+                  <td>删除告警规则</td>
+                  <td><code class="code code--plain">delete</code></td>
+                  <td><span class="tag tag--reserved">未上线</span></td>
+                  <td class="muted">本期仅菜单与路由控制</td>
+                </tr>
+
+                <tr data-module="系统配置" style="border-top:1px solid var(--line-strong);">
+                  <td><span class="name">系统配置</span></td>
+                  <td><code class="code">settings:view</code></td>
+                  <td>查看系统配置</td>
+                  <td><code class="code code--plain">view</code></td>
+                  <td><span class="tag tag--reserved">未上线</span></td>
+                  <td class="muted">本期仅菜单与路由控制</td>
+                </tr>
+                <tr data-module="系统配置">
+                  <td></td>
+                  <td><code class="code">settings:update</code></td>
+                  <td>修改系统配置</td>
+                  <td><code class="code code--plain">update</code></td>
+                  <td><span class="tag tag--reserved">未上线</span></td>
+                  <td class="muted">本期仅菜单与路由控制</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-foot">
+            <span class="note">共 47 条，其中 34 条已接入后端校验，13 条为预留权限；旧权限码已随迁移映射并删除。</span>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

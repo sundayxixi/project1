@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RBAC 页面原型 · 辰光 Agent</title>
+<link rel="stylesheet" href="assets/app.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body data-noreview>
+<div class="standalone">
+  <header class="plainbar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">辰</div>
+      <div>
+        <div class="brand-name">辰光 Agent</div>
+        <div class="brand-sub">RBAC 授权控制台</div>
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <span class="meta">页面原型 · 2026-10 · 依据 PROJECT_SPEC_V2</span>
+  </header>
+
+  <main class="cover">
+    <section class="cover-hero">
+      <div>
+        <div class="cover-kicker">功能授权 + 数据级授权</div>
+        <h1 class="cover-title">权限不是开关，<br>是一本台账。</h1>
+        <p class="cover-lede">
+          谁能调用哪个接口、能看到哪几行数据、一条资源又额外共享给了谁，
+          在这套原型里都可以在同一屏内读到。角色矩阵、数据范围、归属与共享，
+          用同一套视觉语言表达，避免把授权拆成互不相干的三张表。
+        </p>
+        <div class="cover-meta">
+          <div class="m"><div class="k">权限码</div><div class="v">47</div></div>
+          <div class="m"><div class="k">内置角色</div><div class="v">4</div></div>
+          <div class="m"><div class="k">数据资源类别</div><div class="v">4</div></div>
+          <div class="m"><div class="k">页面原型</div><div class="v">16</div></div>
+        </div>
+      </div>
+      <div class="perm-grid" aria-label="开发者角色的默认权限覆盖示意">
+        <div class="pg-head"><span>权限目录 · 47 项</span><span>开发者默认持有 18 项</span></div>
+        <div class="pg-cells" data-perm-grid></div>
+        <div class="pg-legend">
+          <span class="lg"><span class="sw core"></span>Agent 四项</span>
+          <span class="lg"><span class="sw on"></span>其余已持有</span>
+          <span class="lg"><span class="sw"></span>未持有或预留</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="model-map" aria-label="两层授权模型">
+      <div class="model-col">
+        <h3>功能授权 <code class="code">Permission</code></h3>
+        <p>决定“能不能做这件事”。接口、菜单、路由与按钮共用同一组 <code class="code">资源:动作</code> 权限码。</p>
+        <div class="chain"><span>用户</span><i>×</i><span>角色</span><i>×</i><span>权限码</span></div>
+      </div>
+      <div class="model-join" aria-hidden="true"><span class="and">且</span></div>
+      <div class="model-col">
+        <h3>数据授权 <code class="code">Data Scope / ACL</code></h3>
+        <p>决定“能对哪些数据做”。归属人、角色的查看与管理范围、单个资源的共享授权三者取并集。</p>
+        <div class="chain"><span>owner_id</span><i>+</i><span>数据范围</span><i>+</i><span>共享 ACL</span></div>
+      </div>
+    </section>
+
+    <section class="cover-section">
+      <div class="cover-section-head">
+        <h2>按评审顺序走一遍</h2>
+        <p>建议按此顺序检查：先看身份与菜单，再看列表过滤，最后看角色配置与共享。</p>
+      </div>
+      <div class="surface">
+        <table class="cover-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>页面</th>
+              <th>路由</th>
+              <th>所需权限</th>
+              <th>评审关注点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="idx">01</td>
+              <td><a class="pg-link pg-name" href="login.html">登录</a></td>
+              <td class="pg-route">/login</td>
+              <td class="pg-perm"><span class="muted">免登录</span></td>
+              <td class="pg-focus">四种角色的一键体验入口；登录后权限上下文由 /users/me 下发。</td>
+            </tr>
+            <tr>
+              <td class="idx">02</td>
+              <td><a class="pg-link pg-name" href="dashboard.html">工作台</a></td>
+              <td class="pg-route">/</td>
+              <td class="pg-perm"><span class="muted">仅登录</span></td>
+              <td class="pg-focus">菜单按权限过滤；数据范围摘要与可见资源的统计口径。</td>
+            </tr>
+            <tr>
+              <td class="idx">03</td>
+              <td><a class="pg-link pg-name" href="agents.html">Agent 管理</a></td>
+              <td class="pg-route">/agents</td>
+              <td class="pg-perm"><code class="code">agent:view</code></td>
+              <td class="pg-focus">归属人列、共享标记、行内编辑按钮随 can_manage 出现或消失。</td>
+            </tr>
+            <tr>
+              <td class="idx">04</td>
+              <td><a class="pg-link pg-name" href="agent-detail.html">Agent 详情</a></td>
+              <td class="pg-route">/agents/:id</td>
+              <td class="pg-perm"><code class="code">agent:view</code></td>
+              <td class="pg-focus">共享抽屉、转移归属、当前用户的权限来源说明。</td>
+            </tr>
+            <tr>
+              <td class="idx">05</td>
+              <td><a class="pg-link pg-name" href="prompts.html">Prompt 管理</a></td>
+              <td class="pg-route">/prompts</td>
+              <td class="pg-perm"><code class="code">prompt:view</code></td>
+              <td class="pg-focus">同一套归属与行级操作；发布按钮受功能权限控制。</td>
+            </tr>
+            <tr>
+              <td class="idx">06</td>
+              <td><a class="pg-link pg-name" href="knowledge.html">知识库</a></td>
+              <td class="pg-route">/knowledge</td>
+              <td class="pg-perm"><code class="code">knowledge:view</code></td>
+              <td class="pg-focus">运营可管理全部知识库；开发者只能改自己的与共享给本人的。</td>
+            </tr>
+            <tr>
+              <td class="idx">07</td>
+              <td><a class="pg-link pg-name" href="tools.html">工具管理</a></td>
+              <td class="pg-route">/tools</td>
+              <td class="pg-perm"><code class="code">tool:view</code></td>
+              <td class="pg-focus">启停、测试调用与删除的权限差异。</td>
+            </tr>
+            <tr>
+              <td class="idx">08</td>
+              <td><a class="pg-link pg-name" href="models.html">模型管理</a></td>
+              <td class="pg-route">/models</td>
+              <td class="pg-perm"><code class="code">model:view</code></td>
+              <td class="pg-focus">平台级资源，只有功能权限，不出现归属列与共享入口。</td>
+            </tr>
+            <tr>
+              <td class="idx">09</td>
+              <td><a class="pg-link pg-name" href="conversations.html">对话日志</a></td>
+              <td class="pg-route">/conversations</td>
+              <td class="pg-perm"><code class="code">conversation:view</code></td>
+              <td class="pg-focus">日志跟随所属 Agent 的可见性；后端模块未上线，页面标注口径。</td>
+            </tr>
+            <tr>
+              <td class="idx">10</td>
+              <td><a class="pg-link pg-name" href="analytics.html">数据统计</a></td>
+              <td class="pg-route">/analytics</td>
+              <td class="pg-perm"><code class="code">analytics:view</code></td>
+              <td class="pg-focus">只聚合可见 Agent；切换“仅本人”身份后数字随之变化。</td>
+            </tr>
+            <tr>
+              <td class="idx">11</td>
+              <td><a class="pg-link pg-name" href="system-users.html">用户管理</a></td>
+              <td class="pg-route">/system/users</td>
+              <td class="pg-perm"><code class="code">user:view</code></td>
+              <td class="pg-focus">角色列、本人行保护、拥有资源时的删除拒绝。</td>
+            </tr>
+            <tr>
+              <td class="idx">12</td>
+              <td><a class="pg-link pg-name" href="system-roles.html">角色管理</a></td>
+              <td class="pg-route">/system/roles</td>
+              <td class="pg-perm"><code class="code">role:view</code></td>
+              <td class="pg-focus">双 Tab 配置弹窗：模块 × 动作矩阵 + 四类数据范围。</td>
+            </tr>
+            <tr>
+              <td class="idx">13</td>
+              <td><a class="pg-link pg-name" href="system-permissions.html">权限目录</a></td>
+              <td class="pg-route">/system/permissions</td>
+              <td class="pg-perm"><code class="code">permission:view</code></td>
+              <td class="pg-focus">47 条权限只读展示；预留权限标注“未上线”。</td>
+            </tr>
+            <tr>
+              <td class="idx">14</td>
+              <td><a class="pg-link pg-name" href="reserved.html?module=apikey">预留模块</a></td>
+              <td class="pg-route">/system/api-keys</td>
+              <td class="pg-perm"><code class="code">apikey:view</code></td>
+              <td class="pg-focus">本期只做菜单与路由控制；上线前的接入要求。</td>
+            </tr>
+            <tr>
+              <td class="idx">15</td>
+              <td><a class="pg-link pg-name" href="forbidden.html?need=user:view">403 页</a></td>
+              <td class="pg-route">/403</td>
+              <td class="pg-perm"><span class="muted">—</span></td>
+              <td class="pg-focus">展示所需权限码与返回路径；只读身份直访系统页时落到这里。</td>
+            </tr>
+            <tr>
+              <td class="idx">16</td>
+              <td><a class="pg-link pg-name" href="profile.html">个人中心</a></td>
+              <td class="pg-route">/profile</td>
+              <td class="pg-perm"><span class="muted">仅登录</span></td>
+              <td class="pg-focus">只读展示当前角色、权限集合、数据范围与共享给我的资源。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="artifact-note">
+      <div class="artifact">
+        <div class="k">产物一 · 静态页面</div>
+        <h3>HTML + CSS + JavaScript</h3>
+        <p>入口 <code>index.html</code>，共享样式与交互在 <code>assets/app.css</code> 与 <code>assets/app.js</code>。
+          任意页面可加 <code>?as=developer</code>、<code>?as=developerSelf</code>、<code>?as=operator</code>、
+          <code>?as=viewer</code> 直接以该身份打开；加 <code>?ghost=1</code> 标出被隐藏的无权限控件。</p>
+      </div>
+      <div class="artifact">
+        <div class="k">产物二 · 图片</div>
+        <h3>页面截图</h3>
+        <p>全部页面与关键弹窗的 PNG 截图存放在 <code>images/</code>，包含管理员基线、开发者仅本人范围、
+          只读身份与无权限控件标记等变体。设计说明书位于
+          <code>docs/design/ui/RBAC原型设计说明书.md</code>。</p>
+      </div>
+    </section>
+
+    <p class="muted" style="margin-top:26px;font-size:11.5px;">
+      原型内所有姓名、资源与统计数字均为演示数据，不调用真实接口；权限判定逻辑仅用于评审交互。
+    </p>
+  </main>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

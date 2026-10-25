@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>模型管理 · 辰光 Agent</title>
+<link rel="stylesheet" href="assets/app.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body data-page="models" data-crumb="平台功能|模型管理" data-page-perm="model:view">
+<a class="skip-link" href="#main">跳到主要内容</a>
+<div class="shell">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="main">
+    <header class="topbar" id="topbar"></header>
+    <main class="content" id="main">
+      <div class="page">
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">模型管理</h1>
+            <p class="page-desc">模型与供应商是平台级共享资产，只受功能权限控制，不参与数据级授权，也不显示归属人与共享入口。</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn" type="button" data-perm="model:create" data-toast-message="已打开添加供应商表单（原型模拟）">添加供应商</button>
+            <button class="btn btn--primary" type="button" data-perm="model:create" data-toast-message="已打开添加模型表单（原型模拟）">添加模型</button>
+          </div>
+        </div>
+
+        <div class="context-strip" data-context></div>
+
+        <div class="section-head">
+          <h2>供应商</h2>
+          <span class="meta">测试连接归入 model:update</span>
+        </div>
+        <div class="surface">
+          <div class="table-scroll">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>供应商</th>
+                  <th>类型</th>
+                  <th>Base URL</th>
+                  <th>模型数</th>
+                  <th>状态</th>
+                  <th>最近检测</th>
+                  <th class="actions">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="name">Azure OpenAI</span><span class="sub mono">provider_azure</span></td>
+                  <td>Azure</td>
+                  <td class="mono" style="font-size:11.5px;">https://cg.openai.azure.com</td>
+                  <td class="num">3</td>
+                  <td><span class="status status--on">可用</span></td>
+                  <td class="num">5 分钟前</td>
+                  <td class="actions">
+                    <button class="btn btn--sm btn--quiet" type="button" data-perm="model:update" data-toast-message="连接成功，响应 214ms">测试连接</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-perm="model:update" data-toast-message="已打开供应商编辑（原型模拟）">编辑</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-perm="model:delete" data-toast-message="供应商下仍有 3 个模型，删除被拒绝" data-toast-kind="error">删除</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="name">阿里云百炼</span><span class="sub mono">provider_dashscope</span></td>
+                  <td>OpenAI 兼容</td>
+                  <td class="mono" style="font-size:11.5px;">https://dashscope.aliyuncs.com</td>
+                  <td class="num">4</td>
+                  <td><span class="status status--on">可用</span></td>
+                  <td class="num">1 小时前</td>
+                  <td class="actions">
+                    <button class="btn btn--sm btn--quiet" type="button" data-perm="model:update" data-toast-message="连接成功，响应 182ms">测试连接</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-perm="model:update" data-toast-message="已打开供应商编辑（原型模拟）">编辑</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-perm="model:delete" data-toast-message="供应商下仍有 4 个模型，删除被拒绝" data-toast-kind="error">删除</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="name">本地 vLLM</span><span class="sub mono">provider_local</span></td>
+                  <td>自建</td>
+                  <td class="mono" style="font-size:11.5px;">http://10.0.8.21:8000</td>
+                  <td class="num">2</td>
+                  <td><span class="status status--off">不可用</span></td>
+                  <td class="num">12 分钟前</td>
+                  <td class="actions">
+                    <button class="btn btn--sm btn--quiet" type="button" data-perm="model:update" data-toast-message="连接失败：10.0.8.21:8000 超时" data-toast-kind="error">测试连接</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-perm="model:update" data-toast-message="已打开供应商编辑（原型模拟）">编辑</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-perm="model:delete" data-toast-message="供应商下仍有 2 个模型，删除被拒绝" data-toast-kind="error">删除</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="name">Anthropic</span><span class="sub mono">provider_anthropic</span></td>
+                  <td>Anthropic</td>
+                  <td class="mono" style="font-size:11.5px;">https://api.anthropic.com</td>
+                  <td class="num">2</td>
+                  <td><span class="status status--on">可用</span></td>
+                  <td class="num">昨天</td>
+                  <td class="actions">
+                    <button class="btn btn--sm btn--quiet" type="button" data-perm="model:update" data-toast-message="连接成功，响应 301ms">测试连接</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-perm="model:update" data-toast-message="已打开供应商编辑（原型模拟）">编辑</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-perm="model:delete" data-toast-message="供应商下仍有 2 个模型，删除被拒绝" data-toast-kind="error">删除</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="section-head">
+          <h2>模型</h2>
+          <span class="meta">开发者只有 model:view，所有写操作按钮不渲染</span>
+        </div>
+        <div class="surface">
+          <div class="table-scroll">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>模型</th>
+                  <th>供应商</th>
+                  <th>上下文</th>
+                  <th>输入价格</th>
+                  <th>状态</th>
+                  <th class="actions">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="name">gpt-4.1</span><span class="sub mono">model_gpt41</span></td>
+                  <td>Azure OpenAI</td>
+                  <td class="num">128k</td>
+                  <td class="num">¥0.021 / 1k</td>
+                  <td><span class="status status--on">启用</span></td>
+                  <td class="actions">
+                    <button class="btn btn--sm btn--quiet" type="button" data-perm="model:update" data-toast-message="已打开模型编辑（原型模拟）">编辑</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-perm="model:delete" data-toast-message="模型仍被 3 个 Agent 引用，删除被拒绝" data-toast-kind="error">删除</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="name">qwen-max</span><span class="sub mono">model_qwen_max</span></td>
+                  <td>阿里云百炼</td>
+                  <td class="num">32k</td>
+                  <td class="num">¥0.012 / 1k</td>
+                  <td><span class="status status--on">启用</span></td>
+                  <td class="actions">
+                    <button class="btn btn--sm btn--quiet" type="button" data-perm="model:update" data-toast-message="已打开模型编辑（原型模拟）">编辑</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-perm="model:delete" data-toast-message="模型仍被 2 个 Agent 引用，删除被拒绝" data-toast-kind="error">删除</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="name">qwen-32b-local</span><span class="sub mono">model_qwen_local</span></td>
+                  <td>本地 vLLM</td>
+                  <td class="num">32k</td>
+                  <td class="num">—</td>
+                  <td><span class="status status--off">停用</span></td>
+                  <td class="actions">
+                    <button class="btn btn--sm btn--quiet" type="button" data-perm="model:update" data-toast-message="已打开模型编辑（原型模拟）">编辑</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-perm="model:delete" data-toast-message="已删除模型（原型模拟）">删除</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="name">claude-sonnet-5-5</span><span class="sub mono">model_claude_sonnet</span></td>
+                  <td>Anthropic</td>
+                  <td class="num">200k</td>
+                  <td class="num">¥0.018 / 1k</td>
+                  <td><span class="status status--on">启用</span></td>
+                  <td class="actions">
+                    <button class="btn btn--sm btn--quiet" type="button" data-perm="model:update" data-toast-message="已打开模型编辑（原型模拟）">编辑</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-perm="model:delete" data-toast-message="模型仍被 1 个 Agent 引用，删除被拒绝" data-toast-kind="error">删除</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-foot">
+            <span class="note">平台级资源，列表不因身份变化；差异只在功能权限。</span>
+            <div class="pager" aria-label="分页">
+              <button type="button" disabled>上一页</button>
+              <button type="button" class="is-current">1</button>
+              <button type="button">下一页</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="note" style="margin-top:14px;">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+          <span>模型与供应商属于平台资源。管理员可以配置，开发者与运营只能查看；这里没有“归属人”“共享”与数据范围下拉。</span>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

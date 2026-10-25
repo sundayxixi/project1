@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>工作台 · 辰光 Agent</title>
+<link rel="stylesheet" href="assets/app.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body data-page="dashboard" data-crumb="平台功能|工作台" data-scope-summary>
+<a class="skip-link" href="#main">跳到主要内容</a>
+<div class="shell">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="main">
+    <header class="topbar" id="topbar"></header>
+    <main class="content" id="main">
+      <div class="page">
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">工作台</h1>
+            <p class="page-desc"><span data-me-name>陈晓</span>，这是当前身份能看到的工作台。菜单、快捷入口与数据范围都随角色变化。</p>
+          </div>
+          <div class="page-actions">
+            <a class="btn" href="profile.html">我的权限</a>
+            <button class="btn btn--primary" type="button" data-perm="agent:create">新建 Agent</button>
+          </div>
+        </div>
+
+        <div class="context-strip" data-context></div>
+
+        <div class="statline">
+          <div class="stat">
+            <div class="k">权限码</div>
+            <div class="v" data-me-perms>47</div>
+            <div class="d">来自角色权限并集</div>
+          </div>
+          <div class="stat">
+            <div class="k">当前角色</div>
+            <div class="v" style="font-size:22px;" data-me-role>管理员</div>
+            <div class="d">内置角色不可删除</div>
+          </div>
+          <div class="stat">
+            <div class="k">Agent 数据范围</div>
+            <div class="v" style="font-size:15px;line-height:1.6;margin-top:5px;" data-me-scope="agent">全部数据 / 全部数据</div>
+            <div class="d">查看 / 管理</div>
+          </div>
+          <div class="stat">
+            <div class="k">知识库数据范围</div>
+            <div class="v" style="font-size:15px;line-height:1.6;margin-top:5px;" data-me-scope="knowledge">全部数据 / 全部数据</div>
+            <div class="d">查看 / 管理</div>
+          </div>
+        </div>
+
+        <div class="detail-grid">
+          <div class="panel">
+            <div class="panel-head">
+              <h2>最近活动</h2>
+              <span class="meta">按时间倒序 · 仅业务资源</span>
+            </div>
+            <div class="panel-body">
+              <ul class="list-plain">
+                <li>
+                  <span class="t">10 分钟前</span>
+                  <span class="txt"><b>张三</b> 发布了 Agent「智能客服助手」<span>v1.4，共享给李四与赵宁</span></span>
+                </li>
+                <li>
+                  <span class="t">1 小时前</span>
+                  <span class="txt"><b>李四</b> 上传了 3 个文档到「售后 FAQ 库」<span>，索引完成 2 个</span></span>
+                </li>
+                <li>
+                  <span class="t">2 小时前</span>
+                  <span class="txt"><b>陈晓</b> 把知识库「产品知识库」共享给 开发者李四<span>，访问级别：可管理</span></span>
+                </li>
+                <li>
+                  <span class="t">昨天</span>
+                  <span class="txt"><b>孙悦</b> 更新了 Prompt「周报生成模板」<span>，发布 v2.0</span></span>
+                </li>
+                <li>
+                  <span class="t">昨天</span>
+                  <span class="txt"><b>陈晓</b> 调整了「运营」角色的数据范围<span>：知识库管理范围改为全部数据</span></span>
+                </li>
+                <li>
+                  <span class="t">2 天前</span>
+                  <span class="txt"><b>王敏</b> 注册了工具「企业微信通知」<span>，等待测试调用</span></span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="detail-stack">
+            <div class="panel">
+              <div class="panel-head">
+                <h2>我的数据范围</h2>
+                <a class="meta" href="profile.html">详情</a>
+              </div>
+              <div class="panel-body">
+                <dl class="kv">
+                  <dt>Agent</dt><dd><span data-me-scope="agent">全部 / 全部</span></dd>
+                  <dt>Prompt</dt><dd><span data-me-scope="prompt">全部 / 全部</span></dd>
+                  <dt>知识库</dt><dd><span data-me-scope="knowledge">全部 / 全部</span></dd>
+                  <dt>工具</dt><dd><span data-me-scope="tool">全部 / 全部</span></dd>
+                </dl>
+                <div class="note" style="margin-top:14px;">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+                  <span>范围按多角色并集计算。资源级共享会在范围之外额外放行单条资源。</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-head"><h2>快捷入口</h2></div>
+              <div class="panel-body" style="display:grid;gap:8px;">
+                <a class="btn" href="agents.html" data-perm="agent:create">新建 Agent</a>
+                <a class="btn" href="knowledge.html" data-perm="knowledge:create">新建知识库</a>
+                <a class="btn" href="system-roles.html" data-perm="role:view">配置角色权限</a>
+                <a class="btn" href="system-permissions.html" data-perm="permission:view">查看权限目录</a>
+                <p class="faint" style="font-size:11.5px;margin-top:2px;">没有功能权限的入口不会渲染，而不是置灰。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

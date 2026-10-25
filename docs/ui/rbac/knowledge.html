@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>知识库 · 辰光 Agent</title>
+<link rel="stylesheet" href="assets/app.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body data-page="knowledge" data-crumb="平台功能|知识库" data-page-perm="knowledge:view" data-resource="knowledge">
+<a class="skip-link" href="#main">跳到主要内容</a>
+<div class="shell">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="main">
+    <header class="topbar" id="topbar"></header>
+    <main class="content" id="main">
+      <div class="page">
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">知识库</h1>
+            <p class="page-desc">文档与分段不单独授权，完全继承所属知识库。上传、编辑分段、重试与删除都需要对该知识库有管理权限。</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn--primary" type="button" data-perm="knowledge:create" data-toast-message="已打开新建知识库表单（原型模拟）">新建知识库</button>
+          </div>
+        </div>
+
+        <div class="context-strip" data-context></div>
+
+        <div class="toolbar">
+          <label class="search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/></svg>
+            <input type="search" placeholder="搜索知识库名称、归属人" data-filter-table aria-label="搜索知识库">
+          </label>
+          <select class="select" data-filter-status aria-label="按索引状态筛选">
+            <option value="">全部索引状态</option>
+            <option value="on">索引完成</option>
+            <option value="draft">索引中</option>
+            <option value="off">索引失败</option>
+          </select>
+          <select class="select" data-filter-owner aria-label="按归属筛选">
+            <option value="">全部归属</option>
+            <option value="mine">我创建的</option>
+            <option value="shared">共享给我</option>
+          </select>
+        </div>
+
+        <div class="surface" data-table-wrap>
+          <div class="table-scroll">
+            <table class="table" data-count-table>
+              <thead>
+                <tr>
+                  <th>知识库</th>
+                  <th>文档 / 分段</th>
+                  <th>索引状态</th>
+                  <th>归属人</th>
+                  <th>更新时间</th>
+                  <th class="actions">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-owner="u2" data-status="on" data-acl-manage="u3" data-acl-role-view="operator">
+                  <td>
+                    <span class="name">产品知识库</span>
+                    <span class="sub">产品能力、定价与常见问题</span>
+                  </td>
+                  <td class="num">128 / 1,642</td>
+                  <td><span class="status status--on">索引完成</span></td>
+                  <td class="cell-owner">
+                    <span class="owner"><span class="seal" aria-hidden="true">张</span><span class="who">张三</span></span>
+                    <span class="tag tag--share" style="margin-left:6px;">共享 · 可管理</span>
+                  </td>
+                  <td class="num">2 小时前</td>
+                  <td class="actions">
+                    <button class="btn btn--sm" type="button" data-toast-message="已打开知识库详情（原型模拟）">查看</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="knowledge:update">编辑</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="knowledge:update" data-open="share-kb">共享</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-row-manage data-perm="knowledge:delete">删除</button>
+                  </td>
+                </tr>
+                <tr data-owner="u3" data-status="on">
+                  <td>
+                    <span class="name">售后 FAQ 库</span>
+                    <span class="sub">退换货、维修与补偿口径</span>
+                  </td>
+                  <td class="num">46 / 512</td>
+                  <td><span class="status status--on">索引完成</span></td>
+                  <td class="cell-owner">
+                    <span class="owner"><span class="seal" aria-hidden="true">李</span><span class="who">李四</span></span>
+                  </td>
+                  <td class="num">1 小时前</td>
+                  <td class="actions">
+                    <button class="btn btn--sm" type="button" data-toast-message="已打开知识库详情（原型模拟）">查看</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="knowledge:update">编辑</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-row-manage data-perm="knowledge:delete">删除</button>
+                  </td>
+                </tr>
+                <tr data-owner="u6" data-status="on" data-acl-view="u3">
+                  <td>
+                    <span class="name">合同模板库</span>
+                    <span class="sub">标准合同、补充协议与审批条款</span>
+                  </td>
+                  <td class="num">32 / 288</td>
+                  <td><span class="status status--on">索引完成</span></td>
+                  <td class="cell-owner">
+                    <span class="owner"><span class="seal" aria-hidden="true">孙</span><span class="who">孙悦</span></span>
+                    <span class="tag tag--share" style="margin-left:6px;">共享 · 只读</span>
+                  </td>
+                  <td class="num">昨天</td>
+                  <td class="actions">
+                    <button class="btn btn--sm" type="button" data-toast-message="已打开知识库详情（原型模拟）">查看</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="knowledge:update">编辑</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-row-manage data-perm="knowledge:delete">删除</button>
+                  </td>
+                </tr>
+                <tr data-owner="u1" data-status="on">
+                  <td>
+                    <span class="name">内部制度库</span>
+                    <span class="sub">考勤、报销、信息安全制度</span>
+                  </td>
+                  <td class="num">18 / 204</td>
+                  <td><span class="status status--on">索引完成</span></td>
+                  <td class="cell-owner">
+                    <span class="owner"><span class="seal" aria-hidden="true">陈</span><span class="who">陈晓</span></span>
+                  </td>
+                  <td class="num">3 天前</td>
+                  <td class="actions">
+                    <button class="btn btn--sm" type="button" data-toast-message="已打开知识库详情（原型模拟）">查看</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="knowledge:update">编辑</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-row-manage data-perm="knowledge:delete">删除</button>
+                  </td>
+                </tr>
+                <tr data-owner="u4" data-status="draft">
+                  <td>
+                    <span class="name">培训资料库</span>
+                    <span class="sub">新员工培训、产品演练脚本</span>
+                  </td>
+                  <td class="num">64 / 730</td>
+                  <td><span class="status status--draft">索引中</span></td>
+                  <td class="cell-owner">
+                    <span class="owner"><span class="seal" aria-hidden="true">王</span><span class="who">王敏</span></span>
+                  </td>
+                  <td class="num">10 分钟前</td>
+                  <td class="actions">
+                    <button class="btn btn--sm" type="button" data-toast-message="已打开知识库详情（原型模拟）">查看</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="knowledge:update">编辑</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-row-manage data-perm="knowledge:delete">删除</button>
+                  </td>
+                </tr>
+                <tr data-owner="u2" data-status="off" data-acl-view="u5" data-acl-role-view="operator">
+                  <td>
+                    <span class="name">竞品资料</span>
+                    <span class="sub">竞品功能对比与价格监测</span>
+                  </td>
+                  <td class="num">12 / 96</td>
+                  <td><span class="status status--danger">索引失败</span></td>
+                  <td class="cell-owner">
+                    <span class="owner"><span class="seal" aria-hidden="true">张</span><span class="who">张三</span></span>
+                    <span class="tag tag--share" style="margin-left:6px;">共享 · 只读</span>
+                  </td>
+                  <td class="num">4 天前</td>
+                  <td class="actions">
+                    <button class="btn btn--sm" type="button" data-toast-message="已打开知识库详情（原型模拟）">查看</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="knowledge:update" data-toast-message="已重新提交 12 个文档的索引任务">重试</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="knowledge:update">编辑</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-row-manage data-perm="knowledge:delete">删除</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-foot">
+            <span class="note">
+              共 <span data-total-count>6</span> 个知识库，当前可见 <span data-visible-count>6</span> 个
+              <span class="dot-sep" aria-hidden="true"></span>
+              运营角色的管理范围为全部知识库，开发者仅限本人与共享
+            </span>
+            <div class="pager" aria-label="分页">
+              <button type="button" disabled>上一页</button>
+              <button type="button" class="is-current">1</button>
+              <button type="button">下一页</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="empty" data-empty-scope hidden>
+          <div class="glyph" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></svg>
+          </div>
+          <h3>当前数据范围内暂无数据</h3>
+          <p>知识库仍可能存在，只是不在你的查看范围内。共享给你的知识库会单独出现在列表中。</p>
+          <a class="btn" href="profile.html">查看我的数据范围</a>
+        </div>
+
+        <div class="note" style="margin-top:14px;">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+          <span>以「开发者 · 仅本人」身份打开：列表保留自己创建的售后 FAQ 库、共享为可管理的产品知识库、共享为只读的合同模板库，共 3 条。</span>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- 共享抽屉：产品知识库 -->
+<div data-drawer="share-kb" hidden>
+  <div class="drawer-overlay"></div>
+  <aside class="drawer" role="dialog" aria-modal="true" aria-labelledby="share-kb-title">
+    <div class="drawer-head">
+      <div>
+        <h2 id="share-kb-title">共享「产品知识库」</h2>
+        <div class="sub">所有者：张三 · 当前 3 个共享主体</div>
+      </div>
+      <button class="modal-close" type="button" data-close aria-label="关闭共享抽屉" style="margin-left:auto;">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="drawer-body">
+      <div class="note" style="margin-bottom:14px;">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="1"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+        <span>共享给角色时，该角色下所有用户立即获得对应数据访问；文档与分段同步可见。</span>
+      </div>
+
+      <form class="acl-add" data-acl-add onsubmit="return false;">
+        <input class="control" type="text" list="acl-subject-options-kb" placeholder="搜索用户或角色" data-acl-input aria-label="共享对象">
+        <datalist id="acl-subject-options-kb">
+          <option value="陈晓（用户）"></option>
+          <option value="张三（用户）"></option>
+          <option value="李四（用户）"></option>
+          <option value="王敏（用户）"></option>
+          <option value="赵宁（用户）"></option>
+          <option value="孙悦（用户）"></option>
+          <option value="管理员（角色）"></option>
+          <option value="开发者（角色）"></option>
+          <option value="运营（角色）"></option>
+          <option value="只读（角色）"></option>
+        </datalist>
+        <select class="select" data-acl-level-select aria-label="访问级别">
+          <option value="view">只读</option>
+          <option value="manage">可管理</option>
+        </select>
+        <button class="btn btn--primary" type="button" data-acl-add-button>添加</button>
+      </form>
+
+      <div data-acl-list>
+        <div class="acl-row" data-subject="李四" data-kind="user">
+          <div class="acl-subject">
+            <span class="seal seal--sm" aria-hidden="true">李</span>
+            <span><span class="who">李四</span> <span class="kind">用户</span></span>
+          </div>
+          <select class="select level-select" data-acl-level aria-label="李四的访问级别">
+            <option value="view">只读</option>
+            <option value="manage" selected>可管理</option>
+          </select>
+          <button class="btn btn--sm btn--danger" type="button" data-acl-remove>移除</button>
+        </div>
+        <div class="acl-row" data-subject="赵宁" data-kind="user">
+          <div class="acl-subject">
+            <span class="seal seal--sm" aria-hidden="true">赵</span>
+            <span><span class="who">赵宁</span> <span class="kind">用户</span></span>
+          </div>
+          <select class="select level-select" data-acl-level aria-label="赵宁的访问级别">
+            <option value="view" selected>只读</option>
+            <option value="manage">可管理</option>
+          </select>
+          <button class="btn btn--sm btn--danger" type="button" data-acl-remove>移除</button>
+        </div>
+        <div class="acl-row" data-subject="运营" data-kind="role">
+          <div class="acl-subject">
+            <span class="seal seal--sm" aria-hidden="true">运</span>
+            <span><span class="who">运营</span> <span class="kind">角色</span></span>
+          </div>
+          <select class="select level-select" data-acl-level aria-label="运营角色的访问级别">
+            <option value="view" selected>只读</option>
+            <option value="manage">可管理</option>
+          </select>
+          <button class="btn btn--sm btn--danger" type="button" data-acl-remove>移除</button>
+        </div>
+      </div>
+      <div class="acl-meta"><span>授予人：张三</span><span>最近变更：2 小时前</span></div>
+    </div>
+    <div class="drawer-foot">
+      <div class="note">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+        <span>移除共享后，被移除主体的下一次请求即无法访问，无需重新登录。</span>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

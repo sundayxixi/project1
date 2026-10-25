@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>用户管理 · 辰光 Agent</title>
+<link rel="stylesheet" href="assets/app.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body data-page="system-users" data-crumb="系统管理|用户管理" data-page-perm="user:view">
+<a class="skip-link" href="#main">跳到主要内容</a>
+<div class="shell">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="main">
+    <header class="topbar" id="topbar"></header>
+    <main class="content" id="main">
+      <div class="page">
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">用户管理</h1>
+            <p class="page-desc">用户与角色是平台级资源，只受功能权限控制。当前账号不能删除或禁用自己，也不能移除最后一个超级管理员。</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn--primary" type="button" data-perm="user:create" data-toast-message="已打开创建用户表单（原型模拟）">添加用户</button>
+          </div>
+        </div>
+
+        <div class="context-strip" data-context></div>
+
+        <div class="toolbar">
+          <label class="search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/></svg>
+            <input type="search" placeholder="搜索用户名、邮箱或角色" data-filter-table aria-label="搜索用户">
+          </label>
+          <select class="select" data-filter-status aria-label="按状态筛选">
+            <option value="">全部状态</option>
+            <option value="on">活跃</option>
+            <option value="off">禁用</option>
+          </select>
+          <span class="spacer"></span>
+          <span class="faint" style="font-size:11.5px;">8 个账号 · 其中 1 个超管</span>
+        </div>
+
+        <div class="surface">
+          <div class="table-scroll">
+            <table class="table" data-count-table>
+              <thead>
+                <tr>
+                  <th>用户</th>
+                  <th>邮箱</th>
+                  <th>角色</th>
+                  <th>拥有资源</th>
+                  <th>状态</th>
+                  <th>最后登录</th>
+                  <th class="actions">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-uid="u1" data-status="on">
+                  <td>
+                    <span class="name">陈晓</span>
+                    <span class="sub mono">admin</span>
+                  </td>
+                  <td>chenxiao@chenguang.ai</td>
+                  <td>
+                    <span class="tag tag--system">管理员</span>
+                    <span class="tag tag--self" data-self-tag hidden>本人</span>
+                  </td>
+                  <td class="num">12</td>
+                  <td><span class="status status--on">活跃</span></td>
+                  <td class="num">刚刚</td>
+                  <td class="actions">
+                    <button class="btn btn--sm btn--quiet" type="button" data-not-self data-perm="user:update" data-open="user-roles">分配角色</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-not-self data-perm="user:update" data-toast-message="已禁用该用户，其后续请求返回 401" data-toast-kind="warn">禁用</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-not-self data-perm="user:delete" data-delete-user="u1" data-name="陈晓" data-resources="12">删除</button>
+                  </td>
+                </tr>
+                <tr data-uid="u2" data-status="on">
+                  <td>
+                    <span class="name">张三</span>
+                    <span class="sub mono">zhangsan</span>
+                  </td>
+                  <td>zhangsan@chenguang.ai</td>
+                  <td><span class="tag">开发者</span></td>
+                  <td class="num">9</td>
+                  <td><span class="status status--on">活跃</span></td>
+                  <td class="num">10 分钟前</td>
+                  <td class="actions">
+                    <button class="btn btn--sm btn--quiet" type="button" data-not-self data-perm="user:update" data-open="user-roles">分配角色</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-not-self data-perm="user:update" data-toast-message="已禁用该用户，其后续请求返回 401" data-toast-kind="warn">禁用</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-not-self data-perm="user:delete" data-delete-user="u2" data-name="张三" data-resources="9">删除</button>
+                  </td>
+                </tr>
+                <tr data-uid="u3" data-status="on">
+                  <td>
+                    <span class="name">李四</span>
+                    <span class="sub mono">lisi</span>
+                  </td>
+                  <td>lisi@chenguang.ai</td>
+                  <td>
+                    <span class="tag">开发者</span>
+                    <span class="tag tag--self" data-self-tag hidden>本人</span>
+                  </td>
+                  <td class="num">8</td>
+                  <td><span class="status status--on">活跃</span></td>
+                  <td class="num">5 分钟前</td>
+                  <td class="actions">
+                    <button class="btn btn--sm btn--quiet" type="button" data-not-self data-perm="user:update" data-open="user-roles">分配角色</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-not-self data-perm="user:update" data-toast-message="已禁用该用户，其后续请求返回 401" data-toast-kind="warn">禁用</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-not-self data-perm="user:delete" data-delete-user="u3" data-name="李四" data-resources="8">删除</button>
+                  </td>
+                </tr>
+                <tr data-uid="u4" data-status="on">
+                  <td>
+                    <span class="name">王敏</span>
+                    <span class="sub mono">wangmin</span>
+                  </td>
+                  <td>wangmin@chenguang.ai</td>
+                  <td><span class="tag">运营</span></td>
+                  <td class="num">5</td>
+                  <td><span class="status status--on">活跃</span></td>
+                  <td class="num">1 小时前</td>
+                  <td class="actions">
+                    <button class="btn btn--sm btn--quiet" type="button" data-not-self data-perm="user:update" data-open="user-roles">分配角色</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-not-self data-perm="user:update" data-toast-message="已禁用该用户，其后续请求返回 401" data-toast-kind="warn">禁用</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-not-self data-perm="user:delete" data-delete-user="u4" data-name="王敏" data-resources="5">删除</button>
+                  </td>
+                </tr>
+                <tr data-uid="u5" data-status="on">
+                  <td>
+                    <span class="name">赵宁</span>
+                    <span class="sub mono">zhaoning</span>
+                  </td>
+                  <td>zhaoning@chenguang.ai</td>
+                  <td><span class="tag">只读</span></td>
+                  <td class="num">0</td>
+                  <td><span class="status status--on">活跃</span></td>
+                  <td class="num">3 小时前</td>
+                  <td class="actions">
+                    <button class="btn btn--sm btn--quiet" type="button" data-not-self data-perm="user:update" data-open="user-roles">分配角色</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-not-self data-perm="user:update" data-toast-message="已禁用该用户，其后续请求返回 401" data-toast-kind="warn">禁用</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-not-self data-perm="user:delete" data-delete-user="u5" data-name="赵宁" data-resources="0">删除</button>
+                  </td>
+                </tr>
+                <tr data-uid="u6" data-status="on">
+                  <td>
+                    <span class="name">孙悦</span>
+                    <span class="sub mono">sunyue</span>
+                  </td>
+                  <td>sunyue@chenguang.ai</td>
+                  <td>
+                    <span class="tag">开发者</span>
+                    <span class="tag">运营</span>
+                  </td>
+                  <td class="num">6</td>
+                  <td><span class="status status--on">活跃</span></td>
+                  <td class="num">昨天</td>
+                  <td class="actions">
+                    <button class="btn btn--sm btn--quiet" type="button" data-not-self data-perm="user:update" data-open="user-roles">分配角色</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-not-self data-perm="user:update" data-toast-message="已禁用该用户，其后续请求返回 401" data-toast-kind="warn">禁用</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-not-self data-perm="user:delete" data-delete-user="u6" data-name="孙悦" data-resources="6">删除</button>
+                  </td>
+                </tr>
+                <tr data-uid="u7" data-status="on">
+                  <td>
+                    <span class="name">周敏</span>
+                    <span class="sub mono">zhoumin</span>
+                  </td>
+                  <td>zhoumin@chenguang.ai</td>
+                  <td><span class="tag">运营</span></td>
+                  <td class="num">2</td>
+                  <td><span class="status status--on">活跃</span></td>
+                  <td class="num">昨天</td>
+                  <td class="actions">
+                    <button class="btn btn--sm btn--quiet" type="button" data-not-self data-perm="user:update" data-open="user-roles">分配角色</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-not-self data-perm="user:update" data-toast-message="已禁用该用户，其后续请求返回 401" data-toast-kind="warn">禁用</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-not-self data-perm="user:delete" data-delete-user="u7" data-name="周敏" data-resources="2">删除</button>
+                  </td>
+                </tr>
+                <tr data-uid="u8" data-status="off">
+                  <td>
+                    <span class="name">吴迪</span>
+                    <span class="sub mono">wudi</span>
+                  </td>
+                  <td>wudi@chenguang.ai</td>
+                  <td><span class="tag">只读</span></td>
+                  <td class="num">0</td>
+                  <td><span class="status status--off">禁用</span></td>
+                  <td class="num">12 天前</td>
+                  <td class="actions">
+                    <button class="btn btn--sm btn--quiet" type="button" data-not-self data-perm="user:update" data-open="user-roles">分配角色</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-not-self data-perm="user:update" data-toast-message="已启用该用户，登录恢复" data-toast-kind="ok">启用</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-not-self data-perm="user:delete" data-delete-user="u8" data-name="吴迪" data-resources="0">删除</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-foot">
+            <span class="note">
+              当前账号所在行不渲染禁用与删除；删除仍拥有资源的用户会被拒绝
+              <span class="dot-sep" aria-hidden="true"></span>
+              角色变更立即生效
+            </span>
+            <div class="pager" aria-label="分页">
+              <button type="button" disabled>上一页</button>
+              <button type="button" class="is-current">1</button>
+              <button type="button">下一页</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="note" style="margin-top:14px;">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+          <span>“拥有资源”只用于删除前的提示与转移判断，不在列表接口做数据隔离。用户、角色、权限属于平台级资源。</span>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- 分配角色 -->
+<div class="overlay" data-dialog="user-roles" hidden>
+  <div class="modal modal--sm" role="dialog" aria-modal="true" aria-labelledby="roles-title">
+    <div class="modal-head">
+      <div>
+        <h2 id="roles-title">分配角色：<span data-role-user>张三</span></h2>
+        <div class="sub">保存后立即失效该用户缓存，下一次请求生效</div>
+      </div>
+      <button class="modal-close" type="button" data-close aria-label="关闭">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <label class="checkline"><input type="checkbox" value="管理员"> 管理员 <span class="faint" style="font-size:11px;">含全部系统管理权限</span></label>
+      <label class="checkline"><input type="checkbox" value="开发者" checked> 开发者 <span class="faint" style="font-size:11px;">Agent / Prompt 开发</span></label>
+      <label class="checkline"><input type="checkbox" value="运营"> 运营 <span class="faint" style="font-size:11px;">知识库内容维护</span></label>
+      <label class="checkline"><input type="checkbox" value="只读"> 只读 <span class="faint" style="font-size:11px;">仅查看</span></label>
+      <div class="note" style="margin-top:12px;">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+        <span>不能修改自己的角色；不能移除最后一个超级管理员。多角色权限按并集计算。</span>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <span class="meta">user:update</span>
+      <div class="right">
+        <button class="btn" type="button" data-close>取消</button>
+        <button class="btn btn--primary" type="button" data-save-roles>保存角色</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 删除用户 -->
+<div class="overlay" data-dialog="delete-user" hidden>
+  <div class="modal modal--sm" role="dialog" aria-modal="true" aria-labelledby="delete-title">
+    <div class="modal-head">
+      <div>
+        <h2 id="delete-title">删除用户</h2>
+        <div class="sub">该用户没有业务资源，可以删除</div>
+      </div>
+      <button class="modal-close" type="button" data-close aria-label="关闭">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:13px;">确认删除「<strong data-delete-user-name>吴迪</strong>」？</p>
+      <p class="muted" style="font-size:12px;margin-top:6px;">其作为 ACL 主体的共享条目会被同步清理，操作不可撤销。</p>
+    </div>
+    <div class="modal-foot">
+      <span class="meta">user:delete</span>
+      <div class="right">
+        <button class="btn" type="button" data-close>取消</button>
+        <button class="btn btn--primary" type="button" data-confirm-delete-user>确认删除</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

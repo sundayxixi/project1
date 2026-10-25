@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>智能客服助手 · 辰光 Agent</title>
+<link rel="stylesheet" href="assets/app.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body data-page="agents" data-crumb="平台功能|Agent 管理|智能客服助手" data-page-perm="agent:view" data-resource="agent">
+<a class="skip-link" href="#main">跳到主要内容</a>
+<div class="shell">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="main">
+    <header class="topbar" id="topbar"></header>
+    <main class="content" id="main">
+      <div class="page">
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">智能客服助手<span class="qualifier">v1.4</span></h1>
+            <p class="page-desc">智能客服 · 归属张三 · 已共享给李四、赵宁与运营角色。共享只放行数据层，操作仍需对应功能权限。</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn" type="button" data-perm="agent:view" data-toast-message="已打开测试会话（原型模拟），使用已发布版本 v1.4">测试对话</button>
+            <button class="btn" type="button" data-perm="agent:update" data-manage-owner="u2" data-open="share">共享</button>
+            <button class="btn btn--primary" type="button" data-perm="agent:update" data-manage-owner="u2" data-toast-message="已进入编辑模式（原型模拟）">编辑 Agent</button>
+          </div>
+        </div>
+
+        <div class="context-strip" data-context></div>
+
+        <div class="detail-grid">
+          <div class="detail-stack">
+            <div class="panel">
+              <div class="panel-head">
+                <h2>配置摘要</h2>
+                <span class="tag tag--share">运行中</span>
+                <span class="meta">最后发布于 10 分钟前</span>
+              </div>
+              <div class="panel-body">
+                <dl class="kv">
+                  <dt>模型</dt><dd>gpt-4.1 · 供应商 Azure OpenAI</dd>
+                  <dt>温度 / Token</dt><dd class="num">0.3 / 4096</dd>
+                  <dt>关联工具</dt><dd>网页搜索、企业微信通知</dd>
+                  <dt>关联知识库</dt><dd>产品知识库（前缀召回 top 5）</dd>
+                  <dt>创建人</dt><dd>张三 · 2026-08-12</dd>
+                </dl>
+                <div class="section-head" style="margin-top:16px;">
+                  <h2>系统提示词</h2>
+                  <span class="meta">只读预览</span>
+                </div>
+                <pre class="code-block">你是辰光产品的客服助手。回答只引用「产品知识库」中的内容，
+如果检索不到，明确告知用户并建议转人工。
+语气克制，不承诺未上线的能力。</pre>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-head">
+                <h2>版本</h2>
+                <span class="meta">发布与回滚需要 agent:publish 且对该 Agent 有管理权限</span>
+              </div>
+              <div class="table-scroll">
+                <table class="table">
+                  <thead>
+                    <tr><th>版本</th><th>发布时间</th><th>发布人</th><th>状态</th><th class="actions">操作</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="num">v1.4</td><td class="num">2026-10-25 14:32</td><td>张三</td>
+                      <td><span class="status status--on">当前版本</span></td>
+                      <td class="actions"><span class="faint" style="font-size:11.5px;">—</span></td>
+                    </tr>
+                    <tr>
+                      <td class="num">v1.3</td><td class="num">2026-10-18 09:12</td><td>张三</td>
+                      <td><span class="status status--off">历史版本</span></td>
+                      <td class="actions">
+                        <button class="btn btn--sm btn--quiet" type="button" data-perm="agent:publish" data-manage-owner="u2" data-toast-message="已回滚到 v1.3，已生成新的发布记录">回滚</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="num">v1.2</td><td class="num">2026-10-11 17:45</td><td>张三</td>
+                      <td><span class="status status--off">历史版本</span></td>
+                      <td class="actions">
+                        <button class="btn btn--sm btn--quiet" type="button" data-perm="agent:publish" data-manage-owner="u2" data-toast-message="已回滚到 v1.2，已生成新的发布记录">回滚</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="detail-stack">
+            <div class="panel">
+              <div class="panel-head"><h2>归属与共享</h2></div>
+              <div class="panel-body">
+                <div class="owner-card">
+                  <span class="seal seal--lg" aria-hidden="true">张</span>
+                  <div>
+                    <div class="who">张三</div>
+                    <div class="meta">所有者 · 创建于 2026-08-12</div>
+                  </div>
+                </div>
+                <dl class="kv" style="margin-top:14px;">
+                  <dt>共享主体</dt><dd>3 个（2 用户 / 1 角色）</dd>
+                  <dt>共享状态</dt><dd><span class="tag tag--share">共享中</span></dd>
+                  <dt>ACL 变更</dt><dd>立即生效，无需重新登录</dd>
+                </dl>
+                <div style="display:grid;gap:8px;margin-top:14px;">
+                  <button class="btn" type="button" data-perm="agent:update" data-manage-owner="u2" data-open="share">管理共享</button>
+                  <button class="btn" type="button" data-perm="agent:update" data-manage-owner="u2" data-open="transfer">转移归属</button>
+                </div>
+                <p class="faint" style="font-size:11px;margin-top:8px;">转移后原有共享继续有效，新所有者获得管理权限。</p>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-head"><h2>当前用户的判定顺序</h2></div>
+              <div class="panel-body">
+                <ol class="steps">
+                  <li>
+                    <div><div class="h">超级管理员</div><div class="d">is_superuser 直接放行，作为防锁死兜底。</div></div>
+                  </li>
+                  <li>
+                    <div><div class="h">所有者</div><div class="d">owner_id 等于当前用户，天然拥有查看与管理权限。</div></div>
+                  </li>
+                  <li>
+                    <div><div class="h">资源级共享</div><div class="d">命中用户或所属角色的 ACL 条目，按只读或可管理放行。</div></div>
+                  </li>
+                  <li>
+                    <div><div class="h">角色数据范围</div><div class="d">合并多角色的全部、本人、指定用户/角色范围。</div></div>
+                  </li>
+                </ol>
+                <p class="faint" style="font-size:11px;margin-top:10px;">以上均不满足时返回 403，且不区分“资源不存在”与“无权限”。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- 共享抽屉 -->
+<div data-drawer="share" hidden>
+  <div class="drawer-overlay"></div>
+  <aside class="drawer" role="dialog" aria-modal="true" aria-labelledby="share-title">
+    <div class="drawer-head">
+      <div>
+        <h2 id="share-title">共享「智能客服助手」</h2>
+        <div class="sub">所有者：张三 · 当前 3 个共享主体</div>
+      </div>
+      <button class="modal-close" type="button" data-close aria-label="关闭共享抽屉" style="margin-left:auto;">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="drawer-body">
+      <div class="note" style="margin-bottom:14px;">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="1"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+        <span>共享只解决数据层权限。被共享人仍需具备 <code class="code">agent:update</code> 等功能权限才能编辑或再次共享。</span>
+      </div>
+
+      <form class="acl-add" data-acl-add onsubmit="return false;">
+        <input class="control" type="text" list="acl-subject-options" placeholder="搜索用户或角色" data-acl-input aria-label="共享对象">
+        <datalist id="acl-subject-options">
+          <option value="陈晓（用户）"></option>
+          <option value="张三（用户）"></option>
+          <option value="李四（用户）"></option>
+          <option value="王敏（用户）"></option>
+          <option value="赵宁（用户）"></option>
+          <option value="孙悦（用户）"></option>
+          <option value="管理员（角色）"></option>
+          <option value="开发者（角色）"></option>
+          <option value="运营（角色）"></option>
+          <option value="只读（角色）"></option>
+        </datalist>
+        <select class="select" data-acl-level-select aria-label="访问级别">
+          <option value="view">只读</option>
+          <option value="manage">可管理</option>
+        </select>
+        <button class="btn btn--primary" type="button" data-acl-add-button>添加</button>
+      </form>
+
+      <div data-acl-list>
+        <div class="acl-row" data-subject="李四" data-kind="user">
+          <div class="acl-subject">
+            <span class="seal seal--sm" aria-hidden="true">李</span>
+            <span><span class="who">李四</span> <span class="kind">用户</span></span>
+          </div>
+          <select class="select level-select" data-acl-level aria-label="李四的访问级别">
+            <option value="view" selected>只读</option>
+            <option value="manage">可管理</option>
+          </select>
+          <button class="btn btn--sm btn--danger" type="button" data-acl-remove>移除</button>
+        </div>
+        <div class="acl-row" data-subject="赵宁" data-kind="user">
+          <div class="acl-subject">
+            <span class="seal seal--sm" aria-hidden="true">赵</span>
+            <span><span class="who">赵宁</span> <span class="kind">用户</span></span>
+          </div>
+          <select class="select level-select" data-acl-level aria-label="赵宁的访问级别">
+            <option value="view" selected>只读</option>
+            <option value="manage">可管理</option>
+          </select>
+          <button class="btn btn--sm btn--danger" type="button" data-acl-remove>移除</button>
+        </div>
+        <div class="acl-row" data-subject="运营" data-kind="role">
+          <div class="acl-subject">
+            <span class="seal seal--sm" aria-hidden="true">运</span>
+            <span><span class="who">运营</span> <span class="kind">角色</span></span>
+          </div>
+          <select class="select level-select" data-acl-level aria-label="运营角色的访问级别">
+            <option value="view" selected>只读</option>
+            <option value="manage">可管理</option>
+          </select>
+          <button class="btn btn--sm btn--danger" type="button" data-acl-remove>移除</button>
+        </div>
+      </div>
+      <div class="acl-meta"><span>授予人：张三</span><span>最近变更：2 小时前</span></div>
+    </div>
+    <div class="drawer-foot">
+      <div class="note">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+        <span>不能共享给“所有人”。若需全员可见，应通过角色数据范围配置为全部数据。</span>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<!-- 转移归属 -->
+<div class="overlay" data-dialog="transfer" hidden>
+  <div class="modal modal--sm" role="dialog" aria-modal="true" aria-labelledby="transfer-title">
+    <div class="modal-head">
+      <div>
+        <h2 id="transfer-title">转移归属</h2>
+        <div class="sub">智能客服助手 · 当前所有者 张三</div>
+      </div>
+      <button class="modal-close" type="button" data-close aria-label="关闭">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="field">
+        <label for="transfer-owner">新所有者</label>
+        <select class="control" id="transfer-owner" data-transfer-target>
+          <option>陈晓（管理员）</option>
+          <option>李四（开发者）</option>
+          <option>王敏（运营）</option>
+          <option>孙悦（开发者）</option>
+          <option>赵宁（只读）</option>
+        </select>
+        <div class="hint">仅启用状态的用户可以成为新所有者；不能转移给自己。</div>
+      </div>
+      <div class="note">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+        <span>转移后：新所有者获得该 Agent 的管理权限，原所有者失去管理权限；已建立的共享条目保持不变。</span>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <span class="meta">操作记录写入应用日志</span>
+      <div class="right">
+        <button class="btn" type="button" data-close>取消</button>
+        <button class="btn btn--primary" type="button" data-transfer-confirm>确认转移</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

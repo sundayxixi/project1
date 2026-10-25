@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>对话日志 · 辰光 Agent</title>
+<link rel="stylesheet" href="assets/app.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body data-page="conversations" data-crumb="平台功能|对话日志" data-page-perm="conversation:view" data-resource="agent">
+<a class="skip-link" href="#main">跳到主要内容</a>
+<div class="shell">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="main">
+    <header class="topbar" id="topbar"></header>
+    <main class="content" id="main">
+      <div class="page">
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">对话日志<span class="qualifier">预留模块</span></h1>
+            <p class="page-desc">对话日志不单独配置数据范围，跟随所属 Agent 的可见性。后端接口尚未实现，本页用于确认菜单、路由与数据口径。</p>
+          </div>
+          <div class="page-actions">
+            <a class="btn" href="analytics.html">查看统计口径</a>
+          </div>
+        </div>
+
+        <div class="context-strip" data-context></div>
+
+        <div class="note note--warn" style="margin-bottom:14px;">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+          <span><strong>口径：</strong>需要 <code class="code">conversation:view</code> 功能权限，且会话所属 Agent 对当前用户可见。列表按可见 Agent 过滤，不提供绕过参数。</span>
+        </div>
+
+        <div class="toolbar">
+          <label class="search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/></svg>
+            <input type="search" placeholder="搜索会话 ID、Agent 或终端用户" data-filter-table aria-label="搜索对话">
+          </label>
+        </div>
+
+        <div class="surface" data-table-wrap>
+          <div class="table-scroll">
+            <table class="table" data-count-table>
+              <thead>
+                <tr>
+                  <th>会话</th>
+                  <th>Agent</th>
+                  <th>终端用户</th>
+                  <th>消息</th>
+                  <th>时长</th>
+                  <th>开始时间</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-owner="u2" data-acl-view="u3">
+                  <td><span class="name mono" style="font-size:12px;">conv_9f21</span></td>
+                  <td>智能客服助手</td>
+                  <td>张倩（外部）</td>
+                  <td class="num">12</td>
+                  <td class="num">8m 12s</td>
+                  <td class="num">今天 10:42</td>
+                </tr>
+                <tr data-owner="u3">
+                  <td><span class="name mono" style="font-size:12px;">conv_9f18</span></td>
+                  <td>合同审阅助手</td>
+                  <td>王磊（法务）</td>
+                  <td class="num">6</td>
+                  <td class="num">4m 03s</td>
+                  <td class="num">今天 10:31</td>
+                </tr>
+                <tr data-owner="u2" data-acl-view="u3">
+                  <td><span class="name mono" style="font-size:12px;">conv_9f10</span></td>
+                  <td>智能客服助手</td>
+                  <td>李娜（外部）</td>
+                  <td class="num">18</td>
+                  <td class="num">12m 40s</td>
+                  <td class="num">今天 10:12</td>
+                </tr>
+                <tr data-owner="u6">
+                  <td><span class="name mono" style="font-size:12px;">conv_9f02</span></td>
+                  <td>数据问答 Agent</td>
+                  <td>内部 · 运营组</td>
+                  <td class="num">4</td>
+                  <td class="num">2m 18s</td>
+                  <td class="num">今天 09:58</td>
+                </tr>
+                <tr data-owner="u4">
+                  <td><span class="name mono" style="font-size:12px;">conv_8ef7</span></td>
+                  <td>邮件分类助手</td>
+                  <td>系统任务</td>
+                  <td class="num">1</td>
+                  <td class="num">0m 42s</td>
+                  <td class="num">今天 09:40</td>
+                </tr>
+                <tr data-owner="u2" data-acl-view="u3">
+                  <td><span class="name mono" style="font-size:12px;">conv_8ef1</span></td>
+                  <td>智能客服助手</td>
+                  <td>周晨（外部）</td>
+                  <td class="num">9</td>
+                  <td class="num">6m 55s</td>
+                  <td class="num">今天 09:22</td>
+                </tr>
+                <tr data-owner="u3">
+                  <td><span class="name mono" style="font-size:12px;">conv_8ee2</span></td>
+                  <td>招聘筛选助手</td>
+                  <td>内部 · 人力资源</td>
+                  <td class="num">3</td>
+                  <td class="num">1m 30s</td>
+                  <td class="num">今天 09:05</td>
+                </tr>
+                <tr data-owner="u1">
+                  <td><span class="name mono" style="font-size:12px;">conv_8ed0</span></td>
+                  <td>知识库巡检</td>
+                  <td>定时任务</td>
+                  <td class="num">2</td>
+                  <td class="num">3m 10s</td>
+                  <td class="num">今天 08:50</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-foot">
+            <span class="note">
+              当前可见 <span data-visible-count>8</span> 条会话
+              <span class="dot-sep" aria-hidden="true"></span>
+              仅包含你有权查看的 Agent
+            </span>
+            <div class="pager" aria-label="分页">
+              <button type="button" disabled>上一页</button>
+              <button type="button" class="is-current">1</button>
+              <button type="button">下一页</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="empty" data-empty-scope hidden>
+          <div class="glyph" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg>
+          </div>
+          <h3>当前数据范围内暂无对话</h3>
+          <p>暂时没有你有权查看的 Agent 产生的会话，或者这些 Agent 尚未收到消息。</p>
+          <a class="btn" href="agents.html">去 Agent 列表</a>
+        </div>
+
+        <div class="note" style="margin-top:14px;">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+          <span>以「开发者 · 仅本人」身份打开：只剩自己两个 Agent 与共享的智能客服助手产生的 5 条会话。</span>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

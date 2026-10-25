@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>工具管理 · 辰光 Agent</title>
+<link rel="stylesheet" href="assets/app.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body data-page="tools" data-crumb="平台功能|工具管理" data-page-perm="tool:view" data-resource="tool">
+<a class="skip-link" href="#main">跳到主要内容</a>
+<div class="shell">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="main">
+    <header class="topbar" id="topbar"></header>
+    <main class="content" id="main">
+      <div class="page">
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">工具管理</h1>
+            <p class="page-desc">启用、禁用与测试调用归入 <code class="code">tool:update</code>，并要求对该工具拥有管理数据权限。</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn--primary" type="button" data-perm="tool:create" data-toast-message="已打开注册工具表单（原型模拟）">注册工具</button>
+          </div>
+        </div>
+
+        <div class="context-strip" data-context></div>
+
+        <div class="toolbar">
+          <label class="search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/></svg>
+            <input type="search" placeholder="搜索工具名称、归属人" data-filter-table aria-label="搜索工具">
+          </label>
+          <select class="select" data-filter-status aria-label="按状态筛选">
+            <option value="">全部状态</option>
+            <option value="on">运行中</option>
+            <option value="off">已禁用</option>
+          </select>
+          <select class="select" data-filter-owner aria-label="按归属筛选">
+            <option value="">全部归属</option>
+            <option value="mine">我创建的</option>
+            <option value="shared">共享给我</option>
+          </select>
+        </div>
+
+        <div class="surface" data-table-wrap>
+          <div class="table-scroll">
+            <table class="table" data-count-table>
+              <thead>
+                <tr>
+                  <th>工具</th>
+                  <th>类型</th>
+                  <th>调用次数</th>
+                  <th>状态</th>
+                  <th>归属人</th>
+                  <th>最近调用</th>
+                  <th class="actions">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-owner="u2" data-status="on" data-acl-view="u3" data-acl-role-view="operator">
+                  <td>
+                    <span class="name">网页搜索</span>
+                    <span class="sub mono">tool_search</span>
+                  </td>
+                  <td>HTTP</td>
+                  <td class="num">12,480</td>
+                  <td><span class="status status--on">运行中</span></td>
+                  <td class="cell-owner">
+                    <span class="owner"><span class="seal" aria-hidden="true">张</span><span class="who">张三</span></span>
+                    <span class="tag tag--share" style="margin-left:6px;">共享 · 只读</span>
+                  </td>
+                  <td class="num">3 分钟前</td>
+                  <td class="actions">
+                    <button class="btn btn--sm" type="button" data-toast-message="已打开工具详情（原型模拟）">查看</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="tool:update" data-toast-message="测试调用成功，耗时 412ms">测试</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="tool:update" data-toast-message="工具已禁用，正在使用它的 Agent 将跳过该工具">禁用</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-row-manage data-perm="tool:delete">删除</button>
+                  </td>
+                </tr>
+                <tr data-owner="u3" data-status="on">
+                  <td>
+                    <span class="name">企业微信通知</span>
+                    <span class="sub mono">tool_wecom</span>
+                  </td>
+                  <td>HTTP</td>
+                  <td class="num">3,204</td>
+                  <td><span class="status status--on">运行中</span></td>
+                  <td class="cell-owner">
+                    <span class="owner"><span class="seal" aria-hidden="true">李</span><span class="who">李四</span></span>
+                  </td>
+                  <td class="num">28 分钟前</td>
+                  <td class="actions">
+                    <button class="btn btn--sm" type="button" data-toast-message="已打开工具详情（原型模拟）">查看</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="tool:update" data-toast-message="测试调用成功，耗时 236ms">测试</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="tool:update" data-toast-message="工具已禁用，正在使用它的 Agent 将跳过该工具">禁用</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-row-manage data-perm="tool:delete">删除</button>
+                  </td>
+                </tr>
+                <tr data-owner="u6" data-status="off">
+                  <td>
+                    <span class="name">数据库查询</span>
+                    <span class="sub mono">tool_sql</span>
+                  </td>
+                  <td>HTTP</td>
+                  <td class="num">1,842</td>
+                  <td><span class="status status--off">已禁用</span></td>
+                  <td class="cell-owner">
+                    <span class="owner"><span class="seal" aria-hidden="true">孙</span><span class="who">孙悦</span></span>
+                  </td>
+                  <td class="num">2 天前</td>
+                  <td class="actions">
+                    <button class="btn btn--sm" type="button" data-toast-message="已打开工具详情（原型模拟）">查看</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="tool:update" data-toast-message="测试调用失败：连接超时（原型模拟）">测试</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="tool:update" data-toast-message="工具已启用">启用</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-row-manage data-perm="tool:delete">删除</button>
+                  </td>
+                </tr>
+                <tr data-owner="u4" data-status="on">
+                  <td>
+                    <span class="name">日程创建</span>
+                    <span class="sub mono">tool_calendar</span>
+                  </td>
+                  <td>内置</td>
+                  <td class="num">642</td>
+                  <td><span class="status status--on">运行中</span></td>
+                  <td class="cell-owner">
+                    <span class="owner"><span class="seal" aria-hidden="true">王</span><span class="who">王敏</span></span>
+                  </td>
+                  <td class="num">昨天</td>
+                  <td class="actions">
+                    <button class="btn btn--sm" type="button" data-toast-message="已打开工具详情（原型模拟）">查看</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="tool:update" data-toast-message="测试调用成功，已创建演示日程">测试</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="tool:update" data-toast-message="工具已禁用，正在使用它的 Agent 将跳过该工具">禁用</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-row-manage data-perm="tool:delete">删除</button>
+                  </td>
+                </tr>
+                <tr data-owner="u1" data-status="on">
+                  <td>
+                    <span class="name">邮件发送</span>
+                    <span class="sub mono">tool_mail</span>
+                  </td>
+                  <td>HTTP</td>
+                  <td class="num">980</td>
+                  <td><span class="status status--on">运行中</span></td>
+                  <td class="cell-owner">
+                    <span class="owner"><span class="seal" aria-hidden="true">陈</span><span class="who">陈晓</span></span>
+                  </td>
+                  <td class="num">3 天前</td>
+                  <td class="actions">
+                    <button class="btn btn--sm" type="button" data-toast-message="已打开工具详情（原型模拟）">查看</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="tool:update" data-toast-message="测试调用成功，耗时 318ms">测试</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="tool:update" data-toast-message="工具已禁用，正在使用它的 Agent 将跳过该工具">禁用</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-row-manage data-perm="tool:delete">删除</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-foot">
+            <span class="note">
+              共 <span data-total-count>5</span> 个工具，当前可见 <span data-visible-count>5</span> 个
+              <span class="dot-sep" aria-hidden="true"></span>
+              开发者没有 tool:delete，删除按钮不渲染
+            </span>
+            <div class="pager" aria-label="分页">
+              <button type="button" disabled>上一页</button>
+              <button type="button" class="is-current">1</button>
+              <button type="button">下一页</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="empty" data-empty-scope hidden>
+          <div class="glyph" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.2 5.2L4 17l3 3 5.5-5.5a4 4 0 0 0 5.2-5.2l-2.4 2.4-2.3-2.3z"/></svg>
+          </div>
+          <h3>当前数据范围内暂无数据</h3>
+          <p>工具仍可能存在，只是不在你的查看范围内。请查看个人中心确认当前的数据范围。</p>
+          <a class="btn" href="profile.html">查看我的数据范围</a>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

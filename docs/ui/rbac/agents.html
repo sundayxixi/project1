@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent 管理 · 辰光 Agent</title>
+<link rel="stylesheet" href="assets/app.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body data-page="agents" data-crumb="平台功能|Agent 管理" data-page-perm="agent:view" data-resource="agent">
+<a class="skip-link" href="#main">跳到主要内容</a>
+<div class="shell">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="main">
+    <header class="topbar" id="topbar"></header>
+    <main class="content" id="main">
+      <div class="page">
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">Agent 管理</h1>
+            <p class="page-desc">列表只包含你的数据范围内可见的 Agent。行内按钮同时受功能权限与该行的管理权限控制。</p>
+          </div>
+          <div class="page-actions">
+            <a class="btn" href="conversations.html">对话日志</a>
+            <a class="btn btn--primary" href="#" data-perm="agent:create">新建 Agent</a>
+          </div>
+        </div>
+
+        <div class="context-strip" data-context></div>
+
+        <div class="toolbar">
+          <label class="search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/></svg>
+            <input type="search" placeholder="搜索 Agent 名称、归属人" data-filter-table aria-label="搜索 Agent">
+          </label>
+          <select class="select" data-filter-status aria-label="按状态筛选">
+            <option value="">全部状态</option>
+            <option value="on">运行中</option>
+            <option value="off">已停止</option>
+            <option value="draft">草稿</option>
+          </select>
+          <select class="select" data-filter-owner aria-label="按归属筛选">
+            <option value="">全部归属</option>
+            <option value="mine">我创建的</option>
+            <option value="shared">共享给我</option>
+          </select>
+        </div>
+
+        <div class="surface" data-table-wrap>
+          <div class="table-scroll">
+            <table class="table" data-count-table>
+              <thead>
+                <tr>
+                  <th>Agent</th>
+                  <th>状态</th>
+                  <th>版本</th>
+                  <th>归属人</th>
+                  <th>最近更新</th>
+                  <th class="actions">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-owner="u2" data-status="on" data-acl-view="u3,u5" data-acl-role-view="operator">
+                  <td>
+                    <span class="name">智能客服助手</span>
+                    <span class="sub mono">agent_cs_01 · 智能客服</span>
+                  </td>
+                  <td><span class="status status--on">运行中</span></td>
+                  <td class="num">v1.4</td>
+                  <td class="cell-owner">
+                    <span class="owner"><span class="seal" aria-hidden="true">张</span><span class="who">张三</span></span>
+                    <span class="tag tag--share" style="margin-left:6px;">共享 · 只读</span>
+                  </td>
+                  <td class="num">10 分钟前</td>
+                  <td class="actions">
+                    <a class="btn btn--sm" href="agent-detail.html">查看</a>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="agent:update">编辑</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="agent:publish">发布</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-row-manage data-perm="agent:delete">删除</button>
+                  </td>
+                </tr>
+                <tr data-owner="u3" data-status="on">
+                  <td>
+                    <span class="name">合同审阅助手</span>
+                    <span class="sub mono">agent_contract_02 · 法务</span>
+                  </td>
+                  <td><span class="status status--on">运行中</span></td>
+                  <td class="num">v2.1</td>
+                  <td class="cell-owner">
+                    <span class="owner"><span class="seal" aria-hidden="true">李</span><span class="who">李四</span></span>
+                  </td>
+                  <td class="num">1 小时前</td>
+                  <td class="actions">
+                    <a class="btn btn--sm" href="agent-detail.html">查看</a>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="agent:update">编辑</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="agent:publish">发布</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-row-manage data-perm="agent:delete">删除</button>
+                  </td>
+                </tr>
+                <tr data-owner="u2" data-status="off" data-acl-role-view="operator">
+                  <td>
+                    <span class="name">工单摘要 Agent</span>
+                    <span class="sub mono">agent_ticket_03 · 客服</span>
+                  </td>
+                  <td><span class="status status--off">已停止</span></td>
+                  <td class="num">v1.0</td>
+                  <td class="cell-owner">
+                    <span class="owner"><span class="seal" aria-hidden="true">张</span><span class="who">张三</span></span>
+                  </td>
+                  <td class="num">昨天</td>
+                  <td class="actions">
+                    <a class="btn btn--sm" href="agent-detail.html">查看</a>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="agent:update">编辑</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="agent:publish">发布</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-row-manage data-perm="agent:delete">删除</button>
+                  </td>
+                </tr>
+                <tr data-owner="u6" data-status="on">
+                  <td>
+                    <span class="name">数据问答 Agent</span>
+                    <span class="sub mono">agent_data_04 · 数据</span>
+                  </td>
+                  <td><span class="status status--on">运行中</span></td>
+                  <td class="num">v3.0</td>
+                  <td class="cell-owner">
+                    <span class="owner"><span class="seal" aria-hidden="true">孙</span><span class="who">孙悦</span></span>
+                  </td>
+                  <td class="num">昨天</td>
+                  <td class="actions">
+                    <a class="btn btn--sm" href="agent-detail.html">查看</a>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="agent:update">编辑</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="agent:publish">发布</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-row-manage data-perm="agent:delete">删除</button>
+                  </td>
+                </tr>
+                <tr data-owner="u4" data-status="off">
+                  <td>
+                    <span class="name">邮件分类助手</span>
+                    <span class="sub mono">agent_mail_05 · 行政</span>
+                  </td>
+                  <td><span class="status status--off">已停止</span></td>
+                  <td class="num">v1.2</td>
+                  <td class="cell-owner">
+                    <span class="owner"><span class="seal" aria-hidden="true">王</span><span class="who">王敏</span></span>
+                  </td>
+                  <td class="num">3 天前</td>
+                  <td class="actions">
+                    <a class="btn btn--sm" href="agent-detail.html">查看</a>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="agent:update">编辑</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="agent:publish">发布</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-row-manage data-perm="agent:delete">删除</button>
+                  </td>
+                </tr>
+                <tr data-owner="u3" data-status="draft">
+                  <td>
+                    <span class="name">招聘筛选助手</span>
+                    <span class="sub mono">agent_hr_06 · 人力资源</span>
+                  </td>
+                  <td><span class="status status--draft">草稿</span></td>
+                  <td class="num">v0.3</td>
+                  <td class="cell-owner">
+                    <span class="owner"><span class="seal" aria-hidden="true">李</span><span class="who">李四</span></span>
+                  </td>
+                  <td class="num">5 天前</td>
+                  <td class="actions">
+                    <a class="btn btn--sm" href="agent-detail.html">查看</a>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="agent:update">编辑</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="agent:publish">发布</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-row-manage data-perm="agent:delete">删除</button>
+                  </td>
+                </tr>
+                <tr data-owner="u1" data-status="on" data-acl-role-view="operator">
+                  <td>
+                    <span class="name">知识库巡检</span>
+                    <span class="sub mono">agent_kb_07 · 运维</span>
+                  </td>
+                  <td><span class="status status--on">运行中</span></td>
+                  <td class="num">v1.1</td>
+                  <td class="cell-owner">
+                    <span class="owner"><span class="seal" aria-hidden="true">陈</span><span class="who">陈晓</span></span>
+                  </td>
+                  <td class="num">1 周前</td>
+                  <td class="actions">
+                    <a class="btn btn--sm" href="agent-detail.html">查看</a>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="agent:update">编辑</button>
+                    <button class="btn btn--sm btn--quiet" type="button" data-row-manage data-perm="agent:publish">发布</button>
+                    <button class="btn btn--sm btn--danger" type="button" data-row-manage data-perm="agent:delete">删除</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-foot">
+            <span class="note">
+              共 <span data-total-count>7</span> 条，当前可见 <span data-visible-count>7</span> 条
+              <span class="dot-sep" aria-hidden="true"></span>
+              已按查看范围过滤，服务端会再次判定
+            </span>
+            <div class="pager" aria-label="分页">
+              <button type="button" disabled>上一页</button>
+              <button type="button" class="is-current">1</button>
+              <button type="button">下一页</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="empty" data-empty-scope hidden>
+          <div class="glyph" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="1"/><path d="M8 10h8M8 14h5"/></svg>
+          </div>
+          <h3>当前数据范围内暂无数据</h3>
+          <p>资源可能存在，只是不在你的查看范围内。当前身份的查看范围为「仅本人」时，只能看到自己创建与共享给你的 Agent。</p>
+          <a class="btn" href="profile.html">查看我的数据范围</a>
+        </div>
+
+        <div class="note" style="margin-top:14px;">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+          <span>以「开发者 · 仅本人」身份打开可看到列表收缩为 3 条；勾选评审面板的“标记无权限控件”可以看到本应隐藏的按钮。</span>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

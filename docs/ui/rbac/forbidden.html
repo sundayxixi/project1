@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>无权访问 · 辰光 Agent</title>
+<link rel="stylesheet" href="assets/app.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body data-forbidden data-noreview>
+<div class="standalone">
+  <header class="plainbar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">辰</div>
+      <div>
+        <div class="brand-name">辰光 Agent</div>
+        <div class="brand-sub">RBAC 授权控制台</div>
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <span class="meta">当前身份：<span data-me-name>陈晓</span> · <span data-me-role>管理员</span></span>
+  </header>
+
+  <main class="forbidden-wrap">
+    <section class="forbidden">
+      <div class="stamp" aria-hidden="true">403</div>
+      <h1>无权访问该页面</h1>
+      <p class="lede">
+        当前身份「<strong><span data-me-name>陈晓</span></strong> · <span data-me-role>管理员</span>」缺少所需的功能权限，
+        请求没有到达数据层。页面、菜单与接口使用同一套权限码。
+      </p>
+
+      <div class="needbox">
+        <div class="k">所需权限</div>
+        <div class="v" data-need-perms><code class="code">user:view</code></div>
+      </div>
+      <div class="needbox" style="margin-top:8px;">
+        <div class="k">请求页面</div>
+        <div class="v"><code class="code" data-from-page>system-users.html</code></div>
+      </div>
+
+      <div class="actions">
+        <a class="btn btn--primary" href="dashboard.html">返回工作台</a>
+        <a class="btn" href="profile.html">查看我的权限</a>
+        <a class="btn" href="index.html">返回原型目录</a>
+      </div>
+
+      <p class="fine">
+        功能级拒绝与数据级拒绝共用 403，并且不区分“资源不存在”与“无权限”，避免通过响应差异探测资源是否存在。
+        如果这是配置错误，请让管理员在角色管理中分配权限；授权变更会在下一次请求生效。
+      </p>
+    </section>
+  </main>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

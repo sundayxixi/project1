@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" fill="#111A26"/>
+  <rect x="2.5" y="2.5" width="27" height="27" fill="none" stroke="#FFFFFF" stroke-opacity="0.35"/>
+  <text x="16" y="23" font-family="Noto Serif SC, Songti SC, SimSun, serif" font-size="18" fill="#FFFFFF" text-anchor="middle">辰</text>
+</svg>

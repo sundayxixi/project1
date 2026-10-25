@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个人中心 · 辰光 Agent</title>
+<link rel="stylesheet" href="assets/app.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body data-page="profile" data-crumb="个人中心" data-scope-summary>
+<a class="skip-link" href="#main">跳到主要内容</a>
+<div class="shell">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="main">
+    <header class="topbar" id="topbar"></header>
+    <main class="content" id="main">
+      <div class="page">
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">个人中心</h1>
+            <p class="page-desc">只读展示当前身份、权限集合与数据范围，用于排查“为什么看不到某条数据”。修改角色请到用户管理。</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn" type="button" data-toast-message="权限上下文已刷新（原型模拟）">刷新权限上下文</button>
+            <a class="btn" href="login.html">退出登录</a>
+          </div>
+        </div>
+
+        <div class="context-strip" data-context></div>
+
+        <div class="detail-grid">
+          <div class="detail-stack">
+            <div class="panel">
+              <div class="panel-head"><h2>身份信息</h2></div>
+              <div class="panel-body">
+                <div class="owner-card">
+                  <span class="seal seal--lg" aria-hidden="true" data-me-initial>陈</span>
+                  <div>
+                    <div class="who" data-me-name>陈晓</div>
+                    <div class="meta"><span data-me-email>chenxiao@chenguang.ai</span></div>
+                  </div>
+                  <span class="tag tag--live" style="margin-left:auto;">活跃</span>
+                </div>
+                <dl class="kv" style="margin-top:16px;">
+                  <dt>用户名</dt><dd class="mono" data-me-username>chenxiao</dd>
+                  <dt>邮箱</dt><dd data-me-email>chenxiao@chenguang.ai</dd>
+                  <dt>角色</dt><dd><span class="tag" data-me-role>管理员</span></dd>
+                  <dt>超级管理员</dt><dd><span data-me-superuser>是</span> · 跳过一切校验</dd>
+                  <dt>用户 ID</dt><dd class="mono" data-me-uid>u1</dd>
+                  <dt>登录方式</dt><dd>用户名 + 密码 + 验证码</dd>
+                </dl>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-head">
+                <h2>权限集合</h2>
+                <span class="meta">共 <span data-perm-total>47</span> 项 · 多角色并集去重</span>
+              </div>
+              <div class="panel-body">
+                <div data-perm-list></div>
+                <div class="note" style="margin-top:12px;">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+                  <span>权限集合不写入 JWT。页面在登录后与路由切换时调用 <code class="code">GET /api/v1/users/me</code>，缓存在内存上下文。</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-head">
+                <h2>数据范围</h2>
+                <span class="meta">有效范围 = 各角色并集</span>
+              </div>
+              <div class="panel-body panel-body--flush">
+                <table class="scope-table">
+                  <thead>
+                    <tr><th>资源</th><th>有效范围（查看 / 管理）</th><th>作用面</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="res-name">Agent <code class="code">agent</code></td>
+                      <td><span data-me-scope="agent">全部数据 / 仅本人</span></td>
+                      <td class="muted">GET 列表与详情</td>
+                    </tr>
+                    <tr>
+                      <td class="res-name">Prompt <code class="code">prompt</code></td>
+                      <td><span data-me-scope="prompt">全部数据 / 仅本人</span></td>
+                      <td class="muted">编辑、删除、发布</td>
+                    </tr>
+                    <tr>
+                      <td class="res-name">知识库 <code class="code">knowledge</code></td>
+                      <td><span data-me-scope="knowledge">全部数据 / 全部数据</span></td>
+                      <td class="muted">含文档与分段操作</td>
+                    </tr>
+                    <tr>
+                      <td class="res-name">工具 <code class="code">tool</code></td>
+                      <td><span data-me-scope="tool">全部数据 / 仅本人</span></td>
+                      <td class="muted">启停、测试、删除</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="note" style="margin:12px;">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+                  <span>查看范围决定列表与详情；管理范围决定编辑、删除、发布、启停、共享与转移。资源级共享与范围取并集。</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="detail-stack">
+            <div class="panel">
+              <div class="panel-head"><h2>资源级共享</h2><span class="meta">ACL 示例</span></div>
+              <div class="panel-body panel-body--flush">
+                <ul class="list-plain" style="padding:0 16px;">
+                  <li>
+                    <span class="t">知识库</span>
+                    <span class="txt"><b>产品知识库</b><br><span>张三共享给李四 · 可管理</span></span>
+                  </li>
+                  <li>
+                    <span class="t">Agent</span>
+                    <span class="txt"><b>智能客服助手</b><br><span>张三共享给李四 · 只读</span></span>
+                  </li>
+                  <li>
+                    <span class="t">知识库</span>
+                    <span class="txt"><b>合同模板库</b><br><span>孙悦共享给李四 · 只读</span></span>
+                  </li>
+                </ul>
+              </div>
+              <div class="panel-body" style="padding-top:0;">
+                <p class="faint" style="font-size:11px;">ACL 实时查询，不进入用户缓存；添加或移除后下一次请求即生效。</p>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-head"><h2>判定公式</h2></div>
+              <div class="panel-body">
+                <pre class="code-block">允许 = 功能权限通过
+  且 ( is_superuser
+       或 owner_id = 我
+       或 ACL 命中我或我的角色
+       或 角色范围命中 )</pre>
+                <p class="faint" style="font-size:11px;margin-top:8px;">列表过滤在 SQL 查询层完成，前端参数不能扩大范围。</p>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-head"><h2>会话与缓存</h2></div>
+              <div class="panel-body">
+                <dl class="kv">
+                  <dt>缓存 key</dt><dd class="mono" style="font-size:11px;">rbac:user:<span data-me-uid>u1</span></dd>
+                  <dt>TTL</dt><dd class="num">300 秒</dd>
+                  <dt>失效时机</dt><dd>角色权限、数据范围、用户角色、禁用或删除时主动失效</dd>
+                  <dt>Redis 故障</dt><dd>降级查库，不阻断鉴权</dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="note" style="margin-top:14px;">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="1"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+          <span>本页只读。角色与数据范围的修改入口在「用户管理」与「角色管理」，需要 <code class="code">user:update</code> 或 <code class="code">role:update</code>。</span>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>
