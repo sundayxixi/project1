@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy import BigInteger, DateTime, func
+from sqlalchemy import BigInteger, DateTime, Integer, func
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 # 希望创建的每个表，都有几个默认字段；
@@ -23,4 +23,7 @@ class TimestampMixin:
 # 所有 orm 对象都继承 BaseModel
 class BaseModel(Base, TimestampMixin):
     __abstract__ = True
-    id: Mapped[int] = mapped_column(BigInteger, primary_key=True, autoincrement=True)
+    # SQLite 只有 INTEGER PRIMARY KEY 才支持自增；with_variant 让 SQLite 用 Integer，MySQL 仍用 BigInteger
+    id: Mapped[int] = mapped_column(
+        BigInteger().with_variant(Integer, "sqlite"), primary_key=True, autoincrement=True
+    )

@@ -1,20 +1,11 @@
 import redis.asyncio as redis
+import fakeredis.aioredis
 from src.core.config import get_settings
 
 settings = get_settings()
 
-# 模块级别创建连接池（应用启动时初始化一次）
-redis_pool = redis.ConnectionPool(
-    host=settings.REDIS_HOST,
-    port=settings.REDIS_PORT,
-    db=settings.REDIS_DB,
-    password=settings.REDIS_PASSWORD,
-    decode_responses=True,
-    encoding="utf-8",
-)
-
-# 模块级别创建 Redis 客户端实例（复用连接池）; _ 开头认为是 私有变量，不暴露出去
-_redis_client = redis.Redis(connection_pool=redis_pool)
+# 本地免 Docker 开发：使用 fakeredis 内存实现替代真实 Redis 服务，接口完全一致
+_redis_client = fakeredis.aioredis.FakeRedis(decode_responses=True)
 
 
 async def get_redis_client() -> redis.Redis:

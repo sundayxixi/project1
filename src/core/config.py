@@ -32,11 +32,8 @@ class Settings(BaseSettings):
 
     @property
     def DATABASE_URL(self) -> str:
-        return (
-            f"mysql+asyncmy://{self.DB_USER}:{self.DB_PASSWORD}"
-            f"@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
-            f"?charset=utf8mb4"
-        )
+        # 本地免 Docker 开发：直接使用 SQLite 文件库，无需安装 MySQL
+        return "sqlite+aiosqlite:///./chenguang.db"
 
     # 指定环境变量文件
     model_config = {"env_file": ".env", "env_file_encoding": "utf-8"}
