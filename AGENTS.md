@@ -78,3 +78,6 @@
 - **版本控制**：Agent 使用语义化版本字符串 (`v1.0`、`v1.1`)；发布会创建 `AgentVersion` 快照
 - **认证**：JWT 放在 `Authorization: Bearer <token>`；在 `deps.py:get_current_user()` 中验证
 - **分页**：`PageParams` (page、page_size、keyword) → `PageResult<T>` (items、total、page、page_size)
+
+## 项目规范
+每次的产物生成完后需要最终提交到 git 本地仓库。当真正需要提交时需要中断给我提示，让我给出详细的提交信息方可提交，同时还需提交到远程仓库。
