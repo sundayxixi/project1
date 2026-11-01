@@ -1,6 +1,6 @@
 # RBAC 页面原型
 
-依据 `docs/spec/PROJECT_SPEC_V2.md` 制作的静态页面原型，覆盖功能授权、数据范围与资源级共享。所有数据为演示数据，不连接后端。
+依据 `docs/spec/PROJECT_SPEC_V2.md` 制作的静态页面原型，覆盖功能授权、数据范围、资源级共享与用户账号管理。所有数据为演示数据，不连接后端。
 
 ## 目录
 
@@ -17,14 +17,14 @@ docs/ui/rbac/
 ├── models.html                 模型与供应商（平台级资源）
 ├── conversations.html          对话日志（预留模块）
 ├── analytics.html              数据统计（预留模块）
-├── system-users.html           用户管理、分配角色
+├── system-users.html           用户管理：创建、编辑、分配角色、重置密码、启停、删除
 ├── system-roles.html           角色管理、双 Tab 配置弹窗
 ├── system-permissions.html     权限目录（只读，47 条）
 ├── reserved.html               预留模块说明（?module=apikey|audit|alert|settings）
 ├── forbidden.html              403 页面
 ├── profile.html                个人中心：角色、权限集合、数据范围
-├── assets/                     共享样式、交互脚本、favicon
-└── images/                     28 张页面与关键弹窗截图
+├── assets/                     共享样式、交互脚本、favicon、用户管理模块
+└── images/                     40 张页面与关键弹窗截图
 ```
 
 ## 打开方式
@@ -47,7 +47,8 @@ python -m http.server 8123
 |---|---|---|
 | `as` | `admin` / `developer` / `developerSelf` / `operator` / `viewer` | 以指定身份打开 |
 | `ghost` | `1` | 用虚线标出本应隐藏的无权限控件，悬停可看所需权限码 |
-| `open` | `share` / `transfer` / `share-kb` / `role-config` / `user-roles` / `delete-user` | 直接打开对应弹窗或抽屉 |
+| `open` | `share` / `transfer` / `share-kb` / `role-config` / `create-user` / `edit-user` / `user-roles` / `reset-password` / `toggle-user` / `delete-user` | 直接打开对应弹窗或抽屉 |
+| `uid` | `u1` … `u12` | 配合用户管理弹窗，指定要操作的账号 |
 | `tab` | `perm` / `scope` | 配合 `role-config` 打开指定 Tab |
 | `role` | `admin` / `developer` / `operator` / `viewer` / `labeler` | 配合 `role-config` 显示对应角色的配置 |
 | `module` | `apikey` / `audit` / `alert` / `settings` | 预留模块页的模块标识 |
@@ -61,6 +62,8 @@ agents.html?as=developerSelf
 agents.html?as=viewer&ghost=1
 system-roles.html?open=role-config&tab=scope&role=developer
 knowledge.html?open=share-kb
+system-users.html?open=create-user
+system-users.html?open=delete-user&uid=u2   # 展示“仍拥有资源”时的删除拒绝
 system-users.html?as=viewer          # 会被守卫导向 403
 ```
 
@@ -72,11 +75,12 @@ system-users.html?as=viewer          # 会被守卫导向 403
 - 行内编辑、删除、发布、启停等按钮同时受功能权限与该行 `can_manage` 控制。
 - 角色配置的双 Tab：14 个模块 × 5 个动作矩阵，以及 4 类资源的查看/管理范围与指定对象。
 - 共享抽屉支持添加、改级别、移除；操作以 Toast 反馈“立即生效”。
-- 用户管理会隐藏当前账号的危险操作，并对仍拥有资源的用户拒绝删除。
+- 用户管理支持完整账号流程：创建（用户名、邮箱、角色、初始密码，含格式与重复校验）、编辑邮箱与角色、分配角色、重置密码、禁用/启用、删除；搜索、角色/状态筛选与 8 条/页分页联动。
+- 用户管理会隐藏当前账号的禁用与删除入口，并对仍拥有资源的账号或最后一个超级管理员拒绝删除，在弹窗内给出具体原因。
 
 ## 图片资产
 
-`images/` 下为 PNG 截图，包含管理员基线、开发者默认范围、开发者仅本人范围、只读身份与无权限控件标记，以及角色配置、共享、转移、分配角色等关键弹窗，共 31 张。完整清单与说明见 `docs/design/ui/RBAC原型设计说明书.md`。
+`images/` 下为 PNG 截图，包含管理员基线、开发者默认范围、开发者仅本人范围、只读身份与无权限控件标记，以及角色配置、共享、转移、分配角色、用户创建/编辑/重置密码/禁用/删除拒绝等关键弹窗，共 40 张。完整清单与说明见 `docs/design/ui/RBAC原型设计说明书.md`。
 
 ## 相关文档
 

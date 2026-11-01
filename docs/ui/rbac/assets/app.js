@@ -580,7 +580,8 @@
     if (!node) return;
     node.hidden = false;
     lockBody();
-    var focusable = node.querySelector('button, [href], input, select, textarea');
+    var field = node.querySelector('input:not([type="hidden"]):not([disabled]):not([readonly]), select:not([disabled]), textarea:not([disabled])');
+    var focusable = field || node.querySelector('button, [href], input, select, textarea');
     if (focusable) focusable.focus({ preventScroll: true });
   }
   function closeLayer(node) {
@@ -1140,6 +1141,19 @@
       if (targets) targets.hidden = sel.value !== 'CUSTOM';
     });
   }
+
+  /* ---------- 页面级模块接口 ---------- */
+
+  window.CG = {
+    toast: toast,
+    openLayer: openLayer,
+    closeLayer: closeLayer,
+    closeAllLayers: closeAllLayers,
+    can: can,
+    isGhost: function () { return ghostMode; },
+    me: me,
+    icon: icon
+  };
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
